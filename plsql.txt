@@ -1,0 +1,4465 @@
+PLSQL:
+======
+plsql stands for procedural language using sql.
+
+plsql is a combinaton of sql queries which contain procedure 
+features(the features available in other programming language..like..conditional statements,loops and execption).
+
+plsql statement executor(plsql engine) is responible to execute plsql program.
+
+
+Difference sql and plsql:
+==========================
+
+sql
+===
+1) In sql we can execute a only single sql statement at a time.
+
+2)performance degrade..
+
+suppose we have 100 insert queries it will hit the database
+100 times ...
+
+3)we cannot store sql statements physically in the database.
+
+4)IN sql we cannot have conditional statements and loops...etc
+
+
+plsql:
+======
+
+1)we can execute multiple queries as a single request.
+
+2) increase performance
+
+3)we can store the plsql programms or objects  physically
+   in the database.
+
+4)in plsql we can work with conditional statements and
+  loops and handle exceptions.
+
+5)reusability:- plsql program physical store in database
+                  so that multiple users can access
+                   multiple plsql programs.
+
+
+
+plsql objects divided into two parts
+-------------------------------------
+1)programs or anonymoms block --- temporary blocks
+
+2)plsql objects --it physical stored in database
+                   procedure,function,trigger,package..etc
+
+
+plsql program structure:
+========================
+
+declare                                -------optional
+<declare of variable statements>;
+
+begin                                  -- mandatory
+
+<assign value  to variable statements>;
+
+<sql statements>;
+
+exception                              --- optional
+
+<handle exception statements>
+
+end;                                    --- mandatory
+
+/
+
+1) declare:
+=============
+
+this block is  used to delcare the variables or global variables.
+
+ex:
+===
+
+declare
+
+v_eno   number(20);
+v_ename varchar2(20);
+
+2)begin and end:
+================
+
+this block is used to assign the values to variables.
+
+this block is used to write business logic.
+
+syntax:
+========
+
+to assign a value to variable
+
+variablename:=value;
+
+ex:
+===
+
+begin
+
+v_eno:=1001;
+v_ename:='raju';
+
+ business logic:
+=================
+
+to display the output from plsql progrom:
+-------------------------------------------
+
+dbms_output.put_line('message');
+
+dbms_output.put_line(v_eno||' '||v_ename);
+
+ end;
+
+
+to run the plsql program:
+==========================
+
+/
+
+note:
+-----
+to display the plsql out on the console we need to set
+one property called serverouput on
+
+ex:
+===
+
+set serveroutput on;
+
+
+ 
+
+example:1:
+===========
+
+write a plsql program to display welcome message.
+
+
+sol:
+====
+
+begin 
+
+dbms_output.put_line('welcome to plsql');
+
+end;
+
+/
+
+to display errors:
+==================
+
+show errs or show errors;
+
+
+example:2
+=========
+
+write a plsql program to perform sum of two numbers
+and display the static output.
+
+sol:
+====
+
+declare
+
+v_a number(3);
+v_b number(3);
+v_c number(3);
+
+begin
+
+v_a:=10;
+v_b:=20;
+
+v_c:=v_a+v_b;
+
+
+dbms_output.put_line('sum of two numbers of a,b is '||v_c);
+
+end;
+
+/
+
+
+example:3
+===========
+
+write a  plsql program to read the values from 
+keyboard (dynamic) and perform sum of two numbers
+and display the output.
+
+note:- to read the values dynamic
+ we need to use address operator(&);
+
+sol:
+====
+declare
+
+v_x number(3);
+v_y number(3);
+v_z number(3);
+
+begin
+
+v_x:=&v_x;
+
+v_y:=&v_y;
+
+v_z:=v_x+v_y;
+
+dbms_output.put_line('sum of two numbers of x,y is '||v_z);
+
+end;
+
+/
+
+example:4:
+==========
+
+write a plsql program to get and store emloyee name or ename
+of empno=7566 into a variable and display on the console.
+
+note:
+=====
+to get and store any value using select syntax is:
+==================================================
+
+select column_list into variablename1,...variableN from 
+tablename where condition.
+
+
+sol:
+====
+
+declare
+
+v_ename varchar2(20);
+
+begin
+
+select ename into v_ename from emp where empno=7566;
+
+dbms_output.put_line('the employee name is '||v_ename);
+
+end;
+
+/
+
+
+ex:
+===
+write a plsql program to get and store empno, ename, sal of empno=7566 
+into a variables(v_empno,v_en,v_sal) and display on the console.
+
+sol:
+
+declare
+v_eno number(5);
+v_ename varchar2(20);
+v_sal number(10);
+begin
+select empno,ename,sal into v_eno,v_ename,v_sal from emp where empno=7566;
+dbms_output.put_line('the employee details are ');
+dbms_output.put_line(v_eno||' '||v_ename||' '||v_sal);
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using address operator:
+=========================
+
+sol:
+====
+
+declare
+
+v_ename varchar2(20);
+v_eno number(5);
+
+begin
+
+v_eno:=&v_eno;
+
+select ename into v_ename from emp where empno=v_eno;
+
+dbms_output.put_line('the employee name is '||v_ename);
+
+end;
+
+/
+
+
+
+
+example:5
+==========
+
+write a plsql program to get ename,sal,job and store
+this values into a variables of employeeno 7499
+and display the out put like this:-
+
+ename sal  job
+
+xxx   xx    xxx
+
+sol:
+====
+
+declare
+
+v_ename varchar2(10);
+v_sal number(10,2);
+v_job varchar2(10);
+
+begin
+
+select ename,sal,job into v_ename,v_sal,v_job from
+emp where empno=7499;
+
+dbms_output.put_line('ENAME'||' '||'SALARY'||' '||'JOB');
+dbms_output.put_line(v_ename||' '||v_sal||' '||v_job);
+
+end;
+
+/
+
+
+
+example:6
+=========
+
+write a plsql program to 
+a)insert a record into emp11(empno,ename,sal) table;
+b)update a record of empno=1002
+  (note update ename with new value)
+c)delete a record from emp11 table where empno is 1003
+
+sol:
+=-===
+
+begin
+
+insert into emp11 values(1017,'vijay',4000);
+
+update emp11 set ename='poojitha' where empno=1002;
+
+delete from emp11 where empno=1003;
+
+commit;
+
+end;
+
+/ 
+
+example:7
+=========
+
+write a plsql program to insert a record into table 
+emp11 using address operator;
+
+sol:
+=====
+
+declare
+v_eno number(5);
+v_ename varchar2(20);
+v_sal number(10,2);
+
+begin
+
+v_eno:=&v_eno;
+v_ename:='&v_ename';
+v_sal:=&v_sal;
+
+insert into emp11 values(v_eno,v_ename,v_sal);
+
+commit;
+
+end;
+
+/
+
+
+example:8
+=========
+
+write a plsql program to get empno,ename,sal from
+emp and store into variables and display the output.
+where empno=7499;
+
+
+sol:
+====
+
+declare
+
+v_empno number(5);
+v_ename varchar2(10);
+v_sal number(10,2);
+
+
+begin
+
+
+select empno,ename,sal into v_empno,v_ename,v_sal from emp
+where empno=7499;
+
+dbms_output.put_line(v_empno||' '||v_ename||' '||v_sal);
+
+end;
+/
+ 
+
+TYPE(%) REFERENCES:
+================
+Percentage type attribute is used to declare local variable with respect to column type of a table.
+SYNTAX:
+=======
+VARIABLENAME TABLENAME.COLUNMNAME%TYPE;
+
+EX:
+===
+v_empno emp.empno%type;
+
+example:8
+=========
+
+write  a plsql program to declare the variables as type
+refers to emp table(empno,ename,sal) and get or
+store the values into variables  and display the output.
+
+sol:
+====
+
+declare
+
+v_empno emp.empno%type;   --the datatype refers to the type of empno column
+v_ename emp.ename%type;   --the d.t refers to the type of ename
+v_sal emp.sal%type;       -- the d.t refers to the type of sal of emp table.
+
+begin
+
+select empno,ename,sal into v_empno,v_ename,v_sal
+from emp where empno=7499;
+
+dbms_output.put_line(v_empno||' '||v_ename||' '||v_sal);
+
+end;
+/
+
+
+comments in plsql:
+==================
+
+syntax:
+-------
+
+--comments
+
+
+DATA TYPES IN PLSQL
+====================
+1)SCALAR DATA TYPE:
+===================
+SCALAR DATA TYPE IS SAME THE DATATYPE WE USE IN SQL.
+
+EX:
+===
+
+DECLARE
+
+V_ENO NUMBER:=1001;
+
+
+2)REFERENCE DATA TYPES
+-======================
+WE USE REFERENCE DATATYPES WHEN WE WANT TO REFER THE
+TYPE OF THE COLUMNS IN A TABLE.
+
+THERE ARE TWO REFERENCE TYPES
+
+1)%TYPE
+--------
+
+% TYPE IS USED TO COPY THE DATATYPE OF A COLUMN IN A TABLE.
+
+TYPE REFERENCES:
+================
+
+SYNTAX:
+=======
+VARIABLENAME TABLENAME.COLUNMNAME%TYPE;
+
+EX:
+===
+v_empno emp.empno%type;
+
+example:8
+=========
+
+write  a plsql program to declare the variables as type
+refers to emp table(empno,ename,sal) and get or
+store the values into variables  and display the output.
+
+sol:
+====
+
+declare
+
+v_empno emp.empno%type;  --the datatype refers to the type of empno column
+v_ename emp.ename%type;  --the d.t refers to the type of ename
+v_sal emp.sal%type;       -- the d.t refers to the type of sal of emp table.
+
+begin
+
+select empno,ename,sal into v_empno,v_ename,v_sal
+from emp where empno=7499;
+
+dbms_output.put_line(v_empno||' '||v_ename||' '||v_sal);
+
+end;
+/
+
+
+
+
+ 
+2)%ROWTYPE
+----------
+This attribute to declare a local variable which can store complete Row datatype of a table.
+
+%ROWTYPE IS USED TO COPY THE DATATYPE OF
+ ENTIRE ROW OR RECORD   OF A TABLE.
+
+SYNTAX:
+=======
+VARIABLE TABLENAME%ROWTYPE
+
+EX:
+===
+
+SUPPOSE A TABLE EMp11(EMPNO,ENAME,SAL);
+
+V_ROW  EMP11%ROWTYPE
+
+INTERNALLY:
+===========
+V_ROW
+
+------------------------------------
+EMPNO D.T|ENAME D.T |SAL D.T
+------------------------------------
+TO DISPALY VALUES FROM THE ROW TYPE VARIABLE:
+==============================================
+
+SYNTAX:
+========
+
+ROWTYPEVARIABLENAME.COLUMNAME OF A TABLE.
+
+EX:
+===
+v_ROW.EMPNO......
+
+
+EXAMPLE 9:
+===========
+WRITE A PLSQL PROGRAM TO GET ENTIRE ROW OF EMPLOYEE NO 1001
+AND STORE THE EMPLOYEE RECORD INTO ROWTYPE VARIABLE OF TYPE OF EMP11(empno,ename,sal).
+
+
+SOL:
+=====
+
+DECLARE
+
+V_ROW EMP11%ROWTYPE;
+
+BEGIN
+
+SELECT * INTO V_ROW FROM EMP11 WHERE EMPNO=1001;
+
+DBMS_OUTPUT.PUT_LINE('EMPLOYEE DETAILS');
+
+DBMS_OUTPUT.PUT_LINE(V_ROW.EMPNO||' '||V_ROW.ENAME||' '||V_ROW.SAL);
+END;
+
+/
+
+ex:
+===
+WRITE A PLSQL PROGRAM TO GET ENTIRE ROW OF deptno 20
+AND STORE THE deptarment RECORD INTO ROWTYPE VARIABLE OF TYPE OF dept(deptno,dname,loc).
+
+
+
+
+
+
+
+
+
+EXAMPLE:10
+==========
+
+WRITE PLSQL PROGRAM TO GET EMPNO,ENAME,SAL FROM 
+EMP TABLE AND DNAME,LOC FROM DEPT TABLE WHERE EMPNO=7499
+AND STORE THE VALUES INTO VARIABLE  AND DISPLAY IT.using %type
+
+SOL:=
+
+DECLARE
+
+v_ENO   EMP.EMPNO%TYPE;
+V_ENAME EMP.ENAME%TYPE;
+V_DNAME DEPT.DNAME%TYPE;
+V_LOC   DEPT.LOC%TYPE;
+
+BEGIN
+
+SELECT E.EMPNO,E.ENAME,D.DNAME,D.LOC INTO v_ENO,V_ENAME,V_DNAME,V_LOC
+ FROM
+EMP E,DEPT D WHERE D.DEPTNO=E.DEPTNO AND E.EMPNO=7499;
+
+DBMS_OUTPUT.PUT_LINE(V_ENO||' '||V_ENAME||' '|V_DNAME||' '||V_LOC);
+
+END;
+      
+/
+
+
+
+
+3)COMPOSITE DATA TYPE OR RECORD DATA TYPE OR USERDEFINED DATATYPE
+=================================================================
+
+WE CAN CREATE USER DEFINED DATATYPE BASED ON COLUMNS OF
+ONE TABLE OR MORE THAN ONE TABLE.
+
+1)SYNTAX:
+========
+
+declare
+
+TYPE TYPENAME IS RECORD(
+                          COLUMN1 DATATYPE OR TYPEREFERENCE,
+                          COLUMN2  DATATYPE OR TYPE REFERENCE
+                          COLUMN3 DATATYPE OR TYPE REFERENCE;
+                            -----
+                          ------------
+----------------------   COLUMN N DATATYPE OR TYPE REFERENCE
+                        )
+
+2) DELCARE A VARIBLE BASED ON USED DEFINED DATATYPE .
+
+SYNTAX:
+-------
+
+VARIABLE TYPENAME;
+
+
+EXAMPLE 10:
+============
+
+WRITE A PLSQL PROGRAM TO CREATE USERDEFINED DATATYPE FROM
+TWO TABLES EMP(EMPNO,ENAME,SAL),DEPT(DNAME,LOC)AND
+STORE THE VALUES INTO RECORD VARIABLE AND DISPLAY THE OUTPUT.
+
+SOL:
+---
+
+DELCARE 
+                            ---USER DEFINED DATATYPE OR RECORD TYPE
+TYPE V_UD_RES IS RECORD(
+                         EMPNO NUMBER(10),
+                         ENAME VARCHAR2(10),
+                         SAL   NUMBER(10,2),
+                         DNAME DEPT.DNAME%TYPE,
+                         LOC   DEPT.LOC%TYPE);
+
+V_RES V_UD_RES;
+
+BEGIN
+
+SELECT E.EMPNO,E.ENAME,E.SAL,D.DNAME,D.LOC INTO V_RES FROM
+EMP E,DEPT D WHERE D.DEPTNO=E.DEPTNO AND E.EMPNO=7499;
+
+DBMS_OUTPUT.PUT_LINE(V_RES.EMPNO||' '||V_RES.ENAME||' '||V_RES.SAL||
+                      ' '||V_RES.DNAME||' '||V_RES.LOC);
+
+END;
+
+/
+
+
+
+
+CONDITIONAL STATEMENTS:
+=======================
+CONDITIONAL STATEMENST ARE USED TO ABILITY TO PROCESS
+THE PORTION OF DATA DEPENDS ON WHEHTER THE CERTAIN
+CRITERIA(CONDITION) IS MET OR NOT.
+
+1)SIMPLE IF
+-----------
+SYNTAX:
+=======
+IF CONDITION THEN
+
+//STATEMENTS-1
+
+END IF;
+
+
+2)IF-ELSE
+----------
+
+IF CONDITION THEN
+
+---STATEMENTS-1;
+
+ELSE 
+
+---STATEMENTS-2;
+
+END IF;
+
+3)ELSIF-ELSE
+=============
+TO CHECK MULITPLE CONDITIONS
+
+SYNTAX:
+========
+
+IF CONDITION1 THEN
+
+--STATEMENTS-1;
+
+ELSIF CONDITION2 THEN
+
+    --STATEMENTES-2;
+      
+   ELSIF CONDITION3 THEN
+
+      --- STATEMENTS-3;
+
+   ELSE
+
+      -- STATEMENTS-4;
+
+END IF;
+
+
+4)NESTED IF.
+------------
+THE IF CONDITION EMBEDDED IN ANOTHER IF CONDITION.
+
+
+SYNTAX:
+=======
+
+IF CONDITION THEN
+
+    IF CONDITON THEN
+
+    ---STATEMENTS      
+
+    END IF;
+
+ELSE
+
+  IF CONDITION THEN
+ 
+   --STATEMENTS;
+
+  END IF
+
+END IF;
+
+
+EXAMPLE ON CONDITIONAL STATEMENTS:
+===================================
+1) WRITE A PLSQL TO DECLARE TWO VARIABLES AND 
+READ THE VALUES FOR THE VARIABLES USING  ADDRESS
+OPERATOR AND COMPARE THE TWO VARIABLE  AND DISPLAY THE OUTPUT.
+
+SOL:
+=====
+
+DECLARE          
+
+a number(3);
+b number(3);
+
+begin
+
+a:=&a;
+b:=&b;
+
+if(a=b) then                             --simple if
+
+dbms_output.put_Line(' a is equal to b');
+
+end if;
+end;
+
+/
+
+
+using if-else
+==============
+
+DECLARE          
+
+a number(3);
+b number(3);
+
+begin
+
+a:=&a;
+b:=&b;
+
+--if-else
+
+if(a=b) then 
+
+dbms_output.put_Line(' a is equal to b');
+
+else
+
+dbms_output.put_line('a is not equal to b');
+
+end if;
+
+end;
+
+/
+
+
+
+example:
+========
+write a plsql program to declare three variables
+and read the values using address operator and
+compare three variables using elsif-else and nested if condition.
+suppose if a is greater than b,c or b is greater than a,c or 
+c is greater than a,b. 
+relation operator(>) and logical operator(AND,OR)
+
+sol:
+====
+
+declare
+a number(3);
+b number(3);
+c number(3);
+
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+
+if a>b and a>c then
+  dbms_output.put_line(a||' is greater than'||b||','||c);
+
+elsif b>c  then 
+dbms_output.put_line('b is greater than c,a');
+
+else
+ dbms_output.put_line('c is greater than a,b');
+end if;
+ 
+end;
+
+/
+
+
+case statement:
+===============
+this case statement same as switch case.
+syntax:
+========
+
+case expression
+
+when value then ---statement;
+when value then ---statement;
+when value then -- statement;
+
+else
+       ----defaultstatement
+end case;
+
+ex:
+===
+declare
+a number(3);
+b number(3);
+
+begin
+a:=&a;
+b:=&b;
+
+case 'multiply'
+
+when 'add' then dbms_output.put_line(a+b);
+
+when 'multiply' then dbms_output.put_line(a*b);
+
+when 'sub' then dbms_output.put_line(a-b);
+
+else
+
+ dbms_output.put_line('invalid option');
+
+end case;
+
+end;
+/
+
+or
+
+
+declare
+a number(3);
+b number(3);
+v_exp varchar2(10);
+begin
+a:=&a;
+b:=&b;
+v_exp:='&v_exp';
+case v_exp
+when 'add' then dbms_output.put_line(a+b);
+when 'multiply' then dbms_output.put_line(a*b);
+when 'sub' then dbms_output.put_line(a-b);
+else
+ dbms_output.put_line('invalid option');
+end case;
+end;
+/
+
+
+example:
+========
+
+write a plsql program to perform calculation
+based on the user enter a symbol(+,*,-) and read the values
+for variables a,b using address operator using case-else statement.
+
+sol:
+====
+
+declare
+a number(3);
+b number(3);
+c char(2);s
+
+begin
+a:=&a;
+b:=&b;
+c:='&c';
+
+case c
+
+when '+' then
+
+dbms_output.put_line('addition is '||(a+b));
+
+when '*' then
+
+dbms_output.put_line('multiplication is '||a*b);
+
+when  '-' then
+
+dbms_output.put_line('substract is '||(a-b));
+
+else
+
+dbms_output.put_line('invalid operator');
+
+end case;
+
+end;
+/
+
+note:
+=====
+expression can be a function or variable in case 
+
+ 
+
+loops:
+=======
+
+loop are used to execute the set of statements
+until the condition is true.
+
+
+Different type of loops:
+========================
+
+simple loop   -- do-while loop
+while loop
+for loop
+
+1)simple loop:
+==============
+
+this loop execute the sequence of statement  aleast
+one time  before termination of loop.
+
+this loop executes the statements infinite time.
+
+to exit from the loop we need to specify explicity 
+exit condition
+
+
+loop with exit syntax:
+=======================
+
+loop
+
+--set of statements;
+--increament/decrement;
+
+exit when condition;
+
+end loop;
+
+
+note:
+=====
+1)first declare a variable and initialize it.
+2)increment or decrement the value of variable 
+3)specify the exit condition
+
+example:
+========
+
+write a plsql program which prints 1 to 10 numbers using 
+simple loop.
+
+sol:
+=====
+
+declare
+
+v_i number(2):=1; --declaring and initialization
+
+begin
+
+loop
+
+dbms_output.put_line(v_i);
+
+v_i:=v_i +1;      --increment
+
+exit when(v_i=11); --it will come out from the loop
+
+end loop;
+
+end ;
+
+/
+
+
+
+
+while loop:
+============
+
+syntax:
+=======
+
+while condition loop
+
+--set of statements;
+--increment/decrement;
+
+end loop;
+
+
+
+example:
+========
+
+write a plsql program to print 1 to 10 using while loop.
+
+sol:
+----
+
+dec1are
+
+i number(2):=1;
+
+begin
+
+while i<=10 loop
+
+dbms_output.put_line(i);
+
+i:=i+1;
+
+end loop;
+
+end;
+
+/
+
+
+Ex:
+----
+write a plsql program to display multiplication table
+of 2 using while loop
+
+olp:
+----
+2X1=2
+
+
+sol:
+====
+
+dec1are
+
+i number(2):=1;
+n number(2):=2;
+
+begin
+
+while i<=10 loop
+
+dbms_output.put_line(n||'X'||i||'='||n*i);
+
+i:=i+1;
+
+end loop;
+
+end;
+
+/
+
+
+for loop:
+=========
+
+syntax:
+=======
+
+for iterator/variable  in [reverse]  startvalue..endvalue loop
+
+--set of statements;
+
+end loop;
+
+
+example:
+========
+
+write a plsql program to print 1 to 10 numbers using for loop.
+
+sol:
+=====
+begin
+
+for i in 1..10 loop
+
+dbms_output.put_line(i);
+
+end loop;
+
+end;
+
+/
+
+Ex:
+----
+write a plsql program to print 1 to 10 numbers in reverse using for loop.
+
+sol:
+=====
+
+begin
+
+for i in reverse 1..10 loop
+
+dbms_output.put_line(i);
+
+end loop;
+
+end;
+
+/
+
+for loop increment by 2:
+========================
+
+begin
+
+for i in  1..10 loop
+
+if mod(i,2)=1 then
+
+dbms_output.put_line(i);
+ 
+end if;
+
+end loop;
+
+end;
+
+/
+
+note:
+======
+in for loop we doesn't declare a variable .
+
+
+
+
+Cursors:
+========
+Cursor is temporary or context area available in
+pga(program global area) in oracle architecture.
+
+cursor is pointer or handle to a context area.
+
+cursor is used to process the multiple records row by row.
+
+cursor is used to performm intermediate operations(cursor attributes)
+
+
+there two types of cursors:
+===========================
+
+1)implicit cursor
+2)explicit cursor
+
+cursor attributes:
+===================
+%found -- it retrun true when cursor is created   
+              (temporary mem..allocated)
+%notfound--reverse of %found.
+%isopen -- it will return true or false
+            cursor is opened to fetch records
+
+%rowcount;- it will return no of records effected based on DML
+ 
+
+how to use cursor attributes
+=============================
+syntax:
+=======
+cursorname%attributename
+
+
+IMPLICIT cursor:
+================
+implicit cursor is cursor created when we execute dml operation
+like insert,update,delete .
+
+note:
+=====
+by default the implicit cursor name is 'SQL'.
+
+ex:
+====
+
+write a plsql program to update a record in emp_11 table
+increase sal of all employees 10 % where deptno =20;
+and display the no of records effected based on above update statement
+
+sol:
+===
+begin
+
+update emp_11 set sal=sal+(sal*0.1) where deptno=20;
+
+if sql%found then
+
+dbms_output.put_line(sql%rowcount||' record are updated ' );
+
+end if;
+
+end;
+
+/
+EXPLICIT CURSOR:
+================
+ 
+EXPLICIT CURSOR IS DEFINED ON SELECT STATEMENT WHICH RETURN
+MUTIPLE ROWS.
+
+TO PROCESS MUTLIPLE ROWS BASED ON ROW BY ROW THEN WE NEED
+TO GO FOR EXPLICIT CURSOR.
+
+STEPS:
+======
+DECLARE THE CURSOR
+-------------------
+
+DECLARE CURSOR IN DECLARATION SECTION OF PLSQL BLOCK.
+
+SYNTAX:
+=======
+
+CURSOR CURSORNAME IS SELECT * [SPECIFIC COLUMN LIST] FROM TABLENAME
+ [WHERE CONDITION];
+
+
+OPEN THE CURSOR
+================
+
+WE NEED TO OPEN THE CURSOR IN BEGIN BLOCK
+
+SYNTAX:
+=======
+
+BEGIN
+
+OPEN CURSORNAME;
+
+
+FETCH CURSOR
+=============
+
+WE NEED TO FETCH RECORDS FROM CURSOR AREA USING ANY ONE OF THE
+LOOP.
+
+SYNTAX:
+========
+
+LOOP
+
+FETCH CURSORNAME INTO VARIABLE_LIST ,ROWTYPE VARIABLE
+
+EXIT WHEN CURSORNAME%NOTFOUND;
+
+--STATEMENTS TO DISPLAY THE OUTPUT
+
+END LOOP;
+
+
+CLOSE THE CURSOR
+================
+SYNTAX:
+=======
+
+CLOSE CURSORNAME;
+
+
+
+
+EXAMPLE ON CURSORS:
+====================
+
+1) WRITE A PLSQL PROGRAM TO FETCH ALL RECORDS FROM
+THE EMP TABLE AND DISPLAY THE RECORDS USING EXPLICIT CURSOR.
+
+SOL:
+====
+DECLARE
+CURSOR C1 IS SELECT * FROM EMP;
+
+V_RES EMP%ROWTYPE;
+
+BEGIN
+
+OPEN C1;
+
+LOOP
+
+FETCH C1 INTO V_RES;
+EXIT WHEN C1%NOTFOUND;
+
+DBMS_OUTPUT.PUT_LINE(V_RES.EMPNO||' '||V_RES.ENAME||' '
+                    ||V_RES.JOB||' '||V_RES.HIREDATE||' '
+                    ||V_RES.SAL||' '||V_RES.COMM||' '||V_RES.DEPTNO);
+END LOOP;
+
+CLOSE C1;
+
+END;
+
+/
+
+2)WRITE A PLSQL PROGRAM TO GET EMPNO,ENAME,SAL OF
+ALL EMPLOYEE RECORDS FROM EMP USING EXPLICITY CURSOR
+AND STORE EMPNO,ENAME,SAL INTO %TYPE VARIABLES AND DISPLAY IT.
+
+SOL:
+----
+DECLARE
+
+CURSOR C2 IS SELECT EMPNO,ENAME,SAL FROM EMP;
+
+V_ENO EMP.EMPNO%TYPE;
+V_EN  EMP.ENAME%TYPE;
+V_SA  EMP.SAL%TYPE;
+
+BEGIN
+OPEN C2;
+LOOP
+
+FETCH C2 INTO V_ENO,V_EN,V_SA;
+
+EXIT WHEN C2%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE(V_ENO||' '||V_EN||' '||V_SA);
+
+END LOOP;
+
+CLOSE C2;
+
+END;
+/
+
+Ex:
+===
+WRITE PLSQL Cursor PROGRAM TO GET EMPNO,ENAME,SAL FROM 
+EMP TABLE AND DNAME,LOC FROM DEPT TABLE
+AND STORE THE VALUES INTO VARIABLE  AND DISPLAY IT.using %type
+
+SOL:
+
+DECLARE
+
+CURSOR C3 IS SELECT E.EMPNO,E.ENAME,E.SAL,D.DNAME,D.LOC FROM EMP E JOIN DEPT D ON(D.DEPTNO=E.DEPTNO);
+
+V_ENO EMP.EMPNO%TYPE;
+V_EN  EMP.ENAME%TYPE;
+V_SA  EMP.SAL%TYPE;
+v_DN  DEPT.DNAME%TYPE;
+V_LOC DEPT.LOC%TYPE;
+
+BEGIN
+OPEN C3;
+LOOP
+
+FETCH C3 INTO V_ENO,V_EN,V_SA,V_DN,V_LOC;
+
+EXIT WHEN C3%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE(V_ENO||' '||V_EN||' '||V_SA||' '||V_DN||' '||V_LOC);
+
+END LOOP;
+
+CLOSE C3;
+
+END;
+/
+
+
+
+
+
+
+EXAMPLE:
+========
+WRITE A PLSQL PROGRAM TO DISPLAY THE RECORDS FROM EMP
+WHERE DEPTNO =20 
+SOL:
+=====
+DECLARE
+
+CURSOR C3 IS SELECT * FROM EMP WHERE DEPTNO=20;
+
+v_res emp%rowtype;
+
+begin
+
+open c3;
+
+loop
+
+fetch c3 into v_res;
+
+exit when c3%notfound;
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal);
+
+end loop;
+
+close c3;
+
+end;
+
+/
+
+
+cursor with parameter:
+======================
+
+syntax:
+=======
+cursor cursorname(parameters) is select * from 
+emp where condition
+
+open the cursor:
+================
+syntax
+
+open cursorname(value for parameters)
+
+example:
+========
+WRITE A PLSQL PROGRAM TO DISPLAY THE RECORDS FROM EMP
+WHERE DEPTNO 30 using cursor with parameter
+sol:
+====
+declare 
+     
+cursor c4(v_deptno number) is select * from emp where deptno=v_deptno;
+
+v_res emp%rowtype;
+
+begin
+
+open c4(20);
+
+loop
+
+fetch c4 into v_res;
+
+exit when c4%notfound;
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal)
+end loop;
+
+close c4;
+
+end;
+
+/
+
+
+example:
+========
+WRITE A PLSQL PROGRAM TO DISPLAY THE RECORDS FROM EMP
+WHERE DEPTNO using address operator cursor with parameter
+sol:
+====
+declare 
+
+cursor c5(v_deptno number) is select * from emp
+where deptno=v_deptno;
+
+v_res emp%rowtype;
+
+v_dept number(3);
+
+begin
+
+v_dept:=&v_dept;--address operator
+
+open c5(v_dept);
+
+loop
+
+fetch c5 into v_res;
+
+exit when c5%notfound;
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal);
+
+end loop;
+
+close c5;
+
+end;
+
+/
+
+
+cursor with forloop:
+====================
+
+syntax:
+=======
+
+for variable in cursorname loop
+
+//statement;
+
+end loop;
+
+note:
+=====
+
+in cursor with forloop internally it will open the 
+cursor,fetch records and close the cursor.
+
+example:
+========
+write a plsql program to display all the records
+from emp using cursor with for loop.
+
+sol:
+====
+
+declare
+
+cursor c6 is select * from emp;
+
+begin
+
+for v_res in c6 loop
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '
+                     ||v_res.sal||' '||v_res.hiredate||
+                     ' '||v_res.comm);
+
+end loop;
+
+end;
+
+/
+
+
+
+Ex:
+====
+
+Write to plsql program to fetch empno,ename,sal from 
+emp table where deptno 20 using cursor parameter and 
+fetch the records from cursor using for loop.
+
+sol:
+====
+
+declare
+
+cursor c7(v_dno number) is select empno,ename,sal from 
+emp where deptno=v_dno;
+
+begin
+
+for v_res in c7(20) loop
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal);
+
+end loop;
+
+end;
+
+/
+
+
+
+
+
+
+
+
+
+
+
+EXCEPTION:
+==========
+
+AN event which disturb the normal flow of execution(abnormal) of program
+is called exception.
+
+AN exception is an error which occur at run time.
+
+AN exception is occured when we pass invalid input.
+
+to handle the exception:
+=========================
+
+we need to handle exception  using exception block of plsql program
+
+syntax:
+=========
+
+delcare
+
+begin
+--
+---
+
+exception
+ 
+  when exception_name then
+  dbms_output.put_line('message');
+ when exception_name then
+  dbms_output.put_line('message');
+  when others then
+  dbms_output.put_line('message');
+end;
+
+/
+
+ERROR REPORTING FUNCTIONS: They are two Error Reporting functions.
+--------------------------
+1.	SQLCODE
+2.	SQLERRM
+
+
+These error reporting functions are used in when others clause to
+ identified the exception which is raised.
+
+1.	SQLCODE: It returns ERRORCODE
+2.	SQLERRM: It returns Exception number and Exception message.
+
+
+There are two types of exception:
+=================================
+
+1)predefined exceptions or built-in exceptions
+================================================
+
+zero_divide --> divisor is equal to zero
+value_error
+invalid_number
+no_data_found
+too_many_rows --
+dup_val_on_index--
+cursor_already_open
+invalid_cursor
+----etc
+
+2)userdefined exceptions
+-------------------------
+raise
+pragma Exception_init();
+raise_application_error();
+
+predefined:
+============
+
+1)zero_divide:
+==============
+
+this error occurs when user try to divide the value by zero
+
+to handle exception:
+====================
+
+ex:
+===
+declare
+
+a number(4);
+b number(4);
+c number(5);
+
+begin
+
+a:=&a;
+b:=&b;
+
+c:=a/b;
+dbms_output.put_line('division of two numbers a,b '||c);
+
+exception
+when zero_divide then
+  dbms_output.put_line('denominator cannot be zero');
+ when others then
+   dbms_output.put_line('please check the code while reading.');
+end;
+/
+
+value_error:
+============
+
+this error occurs user enter invalid input to variables.
+
+declare
+
+a number(4);
+
+b number(4);
+
+begin
+
+a:=44444; --value_error
+
+b:='raju'; ----value_error
+
+
+to handle the value_error exception
+=====================================
+
+ex:
+===
+
+declare
+
+a number(4);
+b number(5);
+
+begin
+a:=&a;
+b:=&b;
+
+dbms_output.put_line(a||' '||b);
+
+exception 
+   when value_error then
+   dbms_output.put_line('invalid dataype or size of 
+                           variable value exceeded then specified size');
+end;
+/
+
+invalid_number:
+===============
+
+this error will occur when we perform invalid calculation.
+
+ex:
+===
+
+select 'raju'+10 from dual
+       *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+to handle the invalid_number:
+===============================
+
+declare
+
+v_cal varchar2(10);
+
+begin
+
+select 'sysdate'+10 into v_cal from dual;
+
+exception 
+
+when invaild_number then
+
+dbms_output.put_line('please perform valid calculation');
+
+end ;
+
+/
+
+
+no_data_found:
+==============
+
+this errors occurs when try to update,delete,select if 
+record is not available.
+
+to handle the no_data_found:
+=============================
+
+declare
+
+v_name varchar2(10);
+
+begin
+
+select ename into v_name from emp where empno=20;
+
+dbms_output.put_line(v_name);
+
+exception
+
+when no_data_found then
+  dbms_output.put_line('Based on that value no record found');
+
+end;
+
+/
+
+
+
+user defined exception:
+=======================
+
+1)raise:
+=========
+
+this exception are defined by the user.
+
+this exception can be activated or raised explicity
+by the user using raise statement
+
+syntax:
+========
+
+raise exception_name;
+
+
+note:
+====
+1) we need to declare variable of type exception.
+
+2)we need to raise exception explicitly.
+
+3)we need to handle(catch) the raise exception in exception block;
+
+
+syntax:
+========
+
+declare
+
+variablename_exp exception;
+
+begin
+
+raise variablename_exp;
+
+exception 
+
+when variablename_exp;
+
+dbms_output.put_line('message');
+
+end;
+
+/
+
+Ex:
+----
+Declare
+
+MY_EX1 EXCEPTION;	−−Step1 
+
+L_SAL EMP.SAL%TYPE;
+
+Begin 
+DBMS_OUTPUT.PUT_LINE('welcome');
+
+Select SAL INTO L_SAL from emp where empno = &empno; 
+
+IF L_SAL > 2000 THEN
+
+RAISE MY_EX1;	−−Step2 
+
+END IF;
+
+DBMS_OUTPUT.PUT_LINE('The sal is … '||L_sal);
+DBMS_OUTPUT.PUT_LINE('Thank you'); 
+
+EXCEPTION
+
+WHEN MY_EX1 THEN	−−Step3
+DBMS_OUTPUT.PUT_LINE('Sal is two high'); 
+
+WHEN others THEN	−−Step3
+DBMS_OUTPUT.PUT_LINE('Other exceptions'); 
+
+END
+/
+
+example:
+=========
+
+write a plsql program to read the value for variable
+using address operator and check if user enter 
+value is less than 18 then raise the exception the
+using raise statement like this age should be equal to or greater
+than 18 to vote.
+
+sol:
+====
+
+
+declare
+
+v_age number(3);
+
+v_age_exp exception; --exception variable
+
+begin
+
+v_age:=&v_age;
+
+if v_age<18 then
+
+raise v_age_exp;
+
+end if;
+
+dbms_output.put_line('age is valid to vote');
+
+exception
+
+ when v_age_exp then
+
+ dbms_output.put_line
+         ('Age should be equal to or greater than 18 to vote');
+
+end;
+/
+
+
+
+
+2)raise_application_error:
+========================
+
+this raise_application_error is procedure 
+using this we can raise the exception with errorcode
+and errormessage.
+
+ERROR number should be range of −20000 to −20999.
+ERROR message should be displayed less then or equal to 512 characters.
+
+syntax:
+=======
+
+raise_application_error(errorcode,errormessage);
+
+Ex:
+
+Declare
+
+L_sal emp.sal%TYPE; 
+
+Begin
+
+DBMS_OUTPUT.PUT_LINE('Welcome');
+
+Select sal INTO L_sal from emp where empno = 7698; 
+
+IF L_sal > 2000 THEN
+
+RAISE_APPLICATION_ERROR(−20150, 'SAL IS TOO HIGH'); 
+
+END IF;
+
+DBMS_OUTPUT.PUT_LINE('THE SAL IS…'||L_SAL);
+
+ END;
+/
+
+
+ex:
+====
+
+write a plsql program to read the value for a variable
+at run time and check if variable value is
+less than 18 then raise the error using raise_application_error.
+
+ex:
+===
+declare
+
+v_age number(3);
+
+begin
+
+v_age:=&v_age;
+
+if v_age<18 then
+
+raise_application_error(-20008,
+             'Age should be equal to and greater than 18 to vote');
+
+end if;
+
+dbms_output.put_line('Age is valid to vote');
+
+end;
+
+/
+
+
+pragma exception_init:
+======================
+
+In oracle some error doesnot have predefined exception names
+but contain errorcode.
+
+to handle this type of exceptions we need to use
+pragma exception_init.
+
+pragam exception_init is called declarative block.
+
+syntax:
+=======
+declare
+
+pragma exception_init(exception_name,errorcode)
+
+ note:
+=====
+
+exception_name is a variable type of exception.
+
+
+1) we need to declare a variable of type exception
+
+2)declare the pragama exception_init followed by 
+ exception_variable,errorcode.
+
+3)based on exception_variable_name ,we need to
+  handle the exception in exception.
+
+ex:
+===
+
+write a plsql program to delete a row from a table
+course which contain relation to student table
+then it will display integrity constraint -violated.
+this error contain error code(-02292) but not predefined error message.
+we need to handle this error using pragma exception_init.
+
+sol:
+----
+declare
+
+v_pragma_exp exception;  --step1
+
+pragma exception_init(v_pragma_exp,-02292); --step2
+
+begin
+
+delete from course where cid=101;
+
+
+exception
+
+   when v_pragma_exp then  --step3
+   dbms_output.put_line('child record found');
+
+end;
+
+
+/
+
+course 
+------
+create table course(cid number(4),cname varchar2(10),fee number(10));
+
+alter table course add primary key(cid);
+
+student:
+========
+
+create table student(sid number(3),sname varchar2(20),cid number(4));
+
+alter table student primary key(sid);
+
+alter table student add foreign key(cid) references course(cid);
+
+
+
+
+
+Procedures:
+===========
+A procedure is a PL/SQL block which is compiled and permanently stored in the database for repeated execution.
+
+A procedure is named plsql query that store physically 
+in the database that accepts some input parameter
+from user and peform a task.
+
+A procedure is also called as sub program.
+
+A procedure may or may not return a value
+
+A procedure is used to perfrom one or more dml
+operations over database..
+
+syntax:
+========
+
+create or replace procedure <procedurename>
+                (parameters [in][out][in out] datatype)
+is/as
+
+<declaration of variables>;
+
+begin
+
+business login statments;
+
+exception
+
+ when exception_name then
+ dbms_output.put_line('message');
+
+end or end <procedurename>;
+
+/
+
+to execute the procedure:
+=========================
+
+syntax:
+
+exec[ute] procedurename(parameters if any);
+
+
+we can execute procedure in another plsql block:
+=================================================
+
+syntax:
+=======
+
+begin
+
+procedurename(parameters if any);
+
+end;
+/
+
+to list all procedures:
+=======================
+
+select object_name from user_procedures;
+
+
+to drop a procedure:
+=====================
+
+syntax:
+-------
+
+drop procedure procedurename;
+
+
+example:
+========
+create a procedure which take one parameter of type varchar
+and display the welcome message along with user name.
+
+sol:
+====
+
+create or replace procedure wel_msg(v_msg varchar2)
+is                                                      
+begin
+
+dbms_output.put_line('welcome to plsq '||v_msg);
+
+end wel_msg;
+
+/
+
+execute the procedure:
+======================
+execute wel_msg('raghava');
+
+using plsql block:
+==================
+begin
+
+wel_msg('rock raghava');
+           
+end;
+
+
+
+ex:2
+=====
+create a procedure with one paramter number
+to get empno,ename sal from emp table
+where deptno 10,20,30  and display the out empno,ename,sal--%type 
+using cursor
+
+sol:
+----
+create or replace procedure p_c1(v_d number)
+is
+cursor c1 is select empno,ename,sal from emp where deptmno=v_d;
+
+begin
+
+for v_res in c1 loop
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal);
+
+end loop;
+
+end p_c1;
+
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sol:
+=====
+create or replace procedure emp_cursor(v_dno number)
+is
+v_eno emp.empno%type;
+v_en  emp.ename%type;
+v_sa  emp.sal%type;
+
+cursor c1 is select empno,ename,sal from emp where deptno=v_dno;
+
+begin
+
+open c1;
+
+loop
+
+fetch c1 into v_eno,v_en,v_sa ;
+exit when c1%notfound;
+
+dbms_output.put_line(v_eno||' '||v_en||' '||v_sa);
+
+end  loop;
+close c1;
+end emp_cursor;
+/
+ 
+
+to execute the procedure:
+==========================
+execute emp_cursor(20);
+
+Parameters In Procedure:
+========================
+InParameter's are used to accept values from the user.
+
+Out parameters: out parameters are used to return the value to the user.
+
+Steps to invoke procedures which are having out parameters: 
+
+Step 1: create bind variable
+SQL> variable N number 
+
+Step 2: execute the procedure
+SQL> EXEC procdedureName(INparameter,INparameter,:N)
+
+Step 3: print bind variable
+SQL>print N
+
+
+IN out parameters: These parameters are used to accept the value as well as to return the value to user.
+
+
+ex3:
+====
+create a procedure with two in parameters
+which perform sum of two numbers;
+
+sol:
+====
+
+create or replace procedure proc_add(a number,b in number)
+is
+v_res number(5);
+begin
+v_res:=a+b;
+dbms_output.put_line('sum of two numbers a,b '||v_res);
+end;
+/
+
+
+
+ex:4:
+=====
+write a  procedure which takes two input parameters
+and one output  parameter and performs sum of two numbers
+AND RETURN THE SUM VALUE.
+SOL:
+=====
+CREATE OR REPLACE  PROCEDURE PROC_OUT_ADD
+(a in number,b in number,c out number)
+is
+begin
+c:=a+b;
+end;
+/
+
+to execute procedure which contain out parameter using bind variable:
+====================================================================
+variable N number;
+
+execute proc_out_add(10,30,:N);
+
+print N;
+
+to execute procedure which contain out parameter using plsql block :
+====================================================================
+declare
+v_c number;
+
+begin
+
+proc_out_add(10,30,v_c);
+
+dbms_output.put_line('sum of two numbers using out parameters '||v_c);
+
+end;
+/
+
+
+Ex: 
+
+create a procedure which accepts a number and return its square?
+
+sol:
+===
+create or replace procedure proc_sq(a number,s out number)
+is
+begin
+
+s:=a*a;
+
+end;
+
+
+calling a procedure with bind variable:
+---------------------------------------
+
+variable K number;
+
+execute proc_sq(5,:k);
+
+print K;
+
+
+EX:
+====
+CREATE A PROCEDURE GET THE EMPLOYEE NAME OF EMPNO 7566 AND STORE INTO OUT PARAMTER AND DISPLAY IT.
+
+SOL:
+====
+
+CREATE OR REPLACE PROCEDURE PROC_EN(n in number,en out varchar2)
+is
+v_en varchar2(10);
+begin
+select ename into v_en from emp where empno=7566;
+en:=v_en;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create of replace procedure ret_square1(A IN out number) IS
+Begin
+A := A * A; END;
+/
+
+Step 1: SQL> variable m number 
+Step 2: initialize bind variable
+         Begin
+         :m = 5; 
+        END;
+         /
+Step 3: EXEC ret_square1(:m); 
+Step 4:print m;
+
+Note:
+The scope of the bind variable is with respect to one session. Once the environment is closed all the bind variables are lost
+
+
+
+
+
+
+
+ex:5
+====
+create a procedure named as(proc_insert) to insert a  record into emp11 tab1e  using
+IN parameters based no of columns in table.
+
+sol:
+====
+
+create or replace procedure proc_insert_emp11
+(eno in number,ename in varchar2,sal in number)
+is
+begin
+
+insert into emp_11 values(eno,ename,sal) ;
+commit;
+
+end;
+
+/
+
+
+execute proc_insert_emp11(110,'dsds',3000);
+
+
+to  display the source code of a procedure.
+============================================
+
+syntax:
+======
+
+
+select text from user_source where name='procedure name in capital'
+
+ex:
+===
+
+select text from user_source where name='PROC_INSERT_EMP11';
+
+
+
+
+
+FUNCTIONS:
+==========
+
+FUNCTION IS DATABASE OBJECT.
+
+FUNCTION IS NAMED PLSQL BLOCK WHICH RETURNS A VALUE.
+
+FUNCTION IS A SUBPROGRAM THAT A COMPUTE A VALUE.
+
+A FUNCTION IS STORED IN DATABASE REFERRED AS A STORED FUNCTION.
+
+FUNCTION MUST RETURN ALEAST ONE VALUE FROM EXECUTION BLOCK
+
+FUNCTION STORED IN DATABASE WE CAN EXECUTE MULTIPLE TIMES
+
+
+FUNTION SYNTAX:
+================
+
+CREATE OR REPLACE FUNCTION FUNCTIONAME
+                    (PARAMETER1 DATATYPE....
+                     PARAMETER2 DATATYPE)
+RETURN <RETURN DATATYPE>
+IS/AS
+<DECLARATION OF VARIABLES>;
+
+BEGIN
+
+--BUSINESS LOGIC STATEMENTS;
+
+RETURN VALUE;
+
+EXCEPTION
+
+ WHEN EXCPETION_NAME THEN
+ DBMS_OUTPUT.PUT_LINE('');
+
+END; or end functionname
+
+/
+
+
+EX:
+====
+
+CREATE FUNCTION WHICH RETURN COUNT  VALUE OF ENAME COLUMN
+USING FUNCTION WITHOUT PARAMETERS.
+
+Sol;
+====
+
+CREATE OR REPLACE FUNCTION  FN_EN_CN
+RETURN NUMBER --step1
+IS
+
+V_COUNT NUMBER;
+
+BEGIN
+
+SELECT COUNT(ENAME) INTO V_COUNT FROM EMP;
+
+RETURN V_COUNT;  --step2
+ 
+END;
+
+/
+
+TO EXECUTE A FUCNTION USING PLSQL BLOCK:
+========================================
+
+DELCARE
+
+V_C NUMBER;
+
+BEGIN
+
+V_C:=FN_EN_CN;    --CALLING FUNCTION
+
+DBMS_OUTPUT.PUT_LINE(V_C);
+
+END;
+
+/
+
+TO EXECUTE A FUNCTION USING SELECT CLAUSE:
+===========================================
+
+SELECT FN_EN_CN FROM DUAL;
+
+
+
+
+
+
+
+Ex:
+Create a function which accepts two numbers and returns the sum? 
+
+SOL:
+
+Create or replace function ADD_NUM_FUN(A number, B number) 
+Return number
+IS
+C number;
+Begin
+C := A + B;
+Return C; 
+
+END;
+/
+
+Output: function created Calling:
+==================================
+Declare
+N number; 
+Begin
+N := ADD_NUM_FUN(10,20); 
+DBMS_OUTPUT.PUT_LINE(N);
+
+END;
+/
+
+We can invoke the function using 'select' statement.
+Ex: select ADD_NUM_FUN(50,10) from dual;
+
+
+EX:2
+=====
+
+CREATE A FUNCTION WHICH TAKES INPUT FROM 
+USER FOR THREE INPUT VARIABLES (TWO NUMBERS,VARCHAR2)
+AND PEFORM OPERATION SUM,ADD,MULTIPLICATION,DIVISION
+BASED ON SYMBOL PASSED BY THE USER.
+
+
+SOL:
+====
+CREATE OR REPLACE FUNCTION ALL_FN(a in number,b in number ,c varchar2)
+return number
+is
+v_res number(4);
+
+begin
+
+case c 
+
+when '+' then v_res:=a+b;
+when '-' then v_res:=a-b;
+when '*' then v_res:=a*b;
+when '/' then v_res:=a/b;
+
+end case;
+
+return v_res;
+
+Exceptions
+when zero_divide then
+  dbms_output.put_line('denominator should not be a zero');
+
+
+end;
+
+/
+
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION FN_ALL(a in number,b in number,
+c in varchar2) return number
+is
+v_res number;
+begin
+
+IF (c='+') THEN
+v_res:=a+b;
+return v_res;
+
+elsif (c='-') then
+v_res:=a-b;
+return v_res;
+
+elsif (c='*') then
+v_res:=a*b;
+return v_res;
+
+elsif (c='/') then
+v_res:=a/b;
+return v_res;
+ 
+  else
+    return 0;
+end if;
+
+exception 
+
+ when zero_divide then
+  dbms_output.put_line('denominator cannot be zero'); 
+ when invalid_number then
+  dbms_output.put_line('invalidInput');
+ when others then
+  dbms_output.put_line(SQLERRM);
+
+end;
+
+/
+
+to display source code of a function:
+===================================
+
+select text from  user_source where name='functioname in captial';
+
+eX: SELEC TEXT FROM USER_SOURCE WHERE NAME='FN_ALL';
+
+
+Differences between procedure and functions:
+
+Procedures					Functions
+
+1.Procedures need not return any VALUES	     1. Must and should return only one value can return one or more than one value.
+
+2.DML commands are allowed.	                       2. DML commands are not allowed.
+3.Can not be invoked from select statement	      3. Can be invoked from select statement.						               and expressions.		
+
+
+
+
+
+PACKAGE:
+========
+A PACKAGE IS A COLLECTION OF DATABASE OBJECTS
+(VARIABLES,PROCEDURES,FUNCTIONS,Cursors etc)
+
+A PACKAGE  IS USED TO GROUP RELATED OBJECTS.
+
+USING PACKAGE WE CAN CREATE OVERLOADED DATABASE OBJECTS.
+
+EX:-SAME OBJECT WITH SAME NAME WITH DIFFERENCE IN PARAMETERS.
+
+THERE ARE TWO PARTS IN PACKAGE
+
+1)PACKAGE SPECIFICATION
+2)PACKAGE BODY
+
+1)PACKAGE SPECIFICATION:
+========================
+HERE WE CAN DECLARE THE DECLARATIONS  OR SPECIFICATION
+OF DATAOBJECT
+
+SYNTAX:
+-------
+CREATE OR REPLACE  PACKAGE PACKAGENAME
+IS/AS
+<global variables>
+<DELCARATIONS OF OBJECT>;
+
+END;
+
+2)PACKAGE BODY
+===============
+
+HERE WE CAN DEFINE OR IMPLEMENT THE DEFINITIONS FOR THE ABOVE
+SPECIFICATION OR DECLARATIONS.
+
+SYNTAX:
+======
+
+CREATE OR REPLACE PACKAGE BODY  PACKAGENAME
+IS/AS
+
+---IMPLEMENTATIONS FOR ABOVE DELCARED SPECIFICATIONS.
+
+END;
+
+/
+
+EXAMPLE:
+=========
+
+CREATE A PACKAGE WHICH CONTAINS ONE PROCEDURE AND ONE FUNCTION.
+
+NOTE:
+=====
+
+IN PACKAGE CREATE PROCEDURE TO INSERT RECORDS INTO
+             EMP11 TABLE;
+
+IN PACKAGE CREATE A FUNCTION WHICH PERFROM SUM OF THREE NUMBERS.
+
+
+SOL:
+====
+
+CREATE OR REPLACE PACKAGE Pk_FN_PD                                  --package specification
+IS 
+
+PROCEDURE EMP_INSERT_11(EMPNO NUMBER,ENAME VARCHAR2,SAL NUMBER);
+
+FUNCTION ADDITION( a number,b number,c number) return number;
+
+end;
+
+/
+
+create or replace package body Pk_FN_PD            --package body
+is
+
+PROCEDURE EMP_INSERT_11(EMPNO NUMBER,ENAME VARCHAR2,SAL NUMBER)
+IS
+BEGIN
+
+INSERT INTO EMP11 VALUES(EMPNO,ENAME,SAL);
+
+COMMIT;
+
+END EMP_INSERT_11;       --end procedure
+
+FUNCTION ADDITION( a number,b number,c number) 
+return number
+is
+v_res number;
+
+begin
+
+v_res:=a+b+c;
+
+return v_res;
+
+end; --end function
+
+end; --package body end
+/
+
+
+to execute  a procedure or funtion which stored in package:
+===========================================================
+syntax:
+=======
+
+1)execute packagename.procedurename(parameter if any) 
+ex:
+---
+execute pk_fn_pd.EMP_INSERT_11(1001,'sas',3000);
+ 
+2)function using plsql block:
+===============================
+begin
+variablename:=packagename.functionname(parameteres if any);
+end;
+/
+3) select packagename.functionname() from dual;
+
+ex:
+---
+select pk_fn_pd.addition(10,20,30) from dual;
+
+
+example2:
+=========
+
+create a package named as mypack which contain one global variable
+and procedure
+
+note:
+======
+
+declare a variable as row type
+
+IN package create a procedure which will  get all
+employee records from emp table.
+
+and call the procedure to display the records.
+
+sol:
+====
+
+create or replace package mypack      --package specficiation
+is
+v_res  emp%rowtype; --global variable
+
+procedure emp_cur_1;
+
+end;
+
+/
+
+create or replace package body mypack   --package body
+is
+
+procedure emp_cur_1
+is
+cursor  c1 is select * from emp;
+
+begin
+
+open c1;
+
+loop
+
+fetch c1 into v_res;
+exit when c1%notfound;
+
+dbms_output.put_line(v_res.empno||' '||v_res.ename||' '||v_res.sal);
+
+end loop;
+
+close c1
+
+end emp_cur_1;
+
+end;
+
+/
+
+example4:
+==========
+create a package named as pk_ovr_fn which 
+contain overloaded  functions are:
+addition(a number,b number) return number 
+addition(a number,b number,c number) return number
+and 
+execute it.
+
+sol:
+---- 
+create or replace package pk_ovr_fn    --specification
+is
+function addition(a number,b number) return number;
+function addition(a number,b number,c number) return number;
+
+end;
+
+/
+
+create or replace package body pk_ovr_fn 
+is
+
+function addition(a number,b number)
+return number
+is
+begin
+return(a+b);
+end;
+
+function addition(a number,b number,c number)
+return number
+is
+begin
+return(a+b+c);
+end;
+
+end pk_ovr_fn;
+
+/
+or
+
+sol:
+===== 
+package specification:
+----------------------
+
+create or replace package  pk_ovr_fn
+is
+
+function addition(a number,b number) return number;
+function addition(a number,b number,c number) return number;
+
+end;
+/
+
+package body:
+-------------
+
+create or replace package body pk_ovr_fn
+
+is
+
+function addition(a number,b number)
+return number
+is
+v_res number;
+
+begin
+
+v_res:=a+b;
+
+return v_res;
+
+end;
+
+function addition(a number,b number,c number)
+return number
+is
+v_res number;
+
+begin
+
+v_res:=a+b+c;
+
+return v_res;
+
+end;
+
+end;
+
+/
+
+
+
+
+
+TRIGGERS:
+=========
+A TRIGGER IS A OBJECT WHICH STORED PERMANENTLY IN 
+DATABASE.
+
+A TRIGGER IS FIRED AUTOMATICALLY WHEN SOME EVENTS OCCURS.
+
+TRIGGER MAINLY USED FOR BUSINESS AUDITING.
+
+A TRIGGERS IS USED TO KEEP TRACK(BACK UP DATA) OF TABLE DATA.
+
+The purpose of trigger is to maintain the integrity of information on the database.
+
+
+TRIGGER PARTS:
+=============
+
+TRIGGER EVENcT:
+==============
+
+DML EVENT:- THIS FIRES WHEN DML OPERATIONS PERFORMED ON OBJECT.
+
+DDL EVENT :- THIS FIRES WHEN DDL OPERATIONS PERFROMED ON SCHEMA.
+
+DATABASE EVENT;- THIS FIRES WHEN LOGIN,LOGOFF,STARTUP/SHUTDOWN.
+
+TRIGGER RESTRICTION:
+====================
+BEFORE :- it fires before the specified event has occured.
+AFTER :- It fires after the specified event had occured.
+
+
+TRIGGER TYPES:
+==============
+
+ROW-LEVEL TRIGGERS :- IT FIRES THE EVENT FOR EVERY RECORD GOT
+                      THAT  EFFECTED BASED ON EVENT.
+                      (FOR EACH ROW)
+
+STATEMENT LEVEL TRIGGERS:-IT FIRES THE TIRGGER EVENT ONLY ONCE
+                           (BY DEFAULT).
+
+
+PSEUDO COLUMNS:
+===============
+
+:NEW:- IT REPRESENT NEW VALUES FOR A COLUMNS OF A TABLE 
+
+:OLD :- IT REPRESNT OLD VALUES FOR A COLUMNS OF A TABLE.
+
+
+CONDITIONAL STATEMENTS IN TRIGGERS:
+====================================
+
+INSERTING
+
+UPDATING
+
+DELETING
+
+
+SYNTAX OF TRIGGER
+=================
+CREATE OR REPLACE TRIGGER TRIGGERNAME
+
+[BEFORE/AFTER]                                   --TRIGGER RESTRICTION
+
+[INSERT OR UPDATE OR DELETE OR INSTEAD OF]       -- TRIGGER EVENT
+
+[OF COLUMNS]                               -- ON COLUMNS 
+
+ON 
+
+<UNDERLYING OBJECTS>                  --IT CAN BE TABLE OR VIEW(COMPLEX VIEW)
+
+[FOR EACH ROW ]             -- ROW -LEVEL TRIGGERS
+
+[WHEN CONDITON]            -- USED TO ACTIVATE THE TRIGGER BASED ON CONDITION.
+
+DECLARE
+
+<DELCARE OF VARIABLE STATEMENTS>;
+
+BEGIN
+
+---TRIGGER BUSINESS LOGIC OR TRIGGER OPERATIONS
+
+EXCEPTION 
+
+  WHEN EXCEPTION THEN
+  DBMS_OUTPUT.PUT_LINE('');
+
+END; OR END TRIGGERNAME;
+
+/
+
+
+EXAMPLE:
+========
+
+CREATE A TRIGGER on emp11 if user  before insert or delete or update any record
+into a table a trigger action(insert or delete or update
+ record by user) 
+to be performed using statment level
+
+sol:
+====
+create or replace trigger trg_emp11
+
+before insert or delete or update on emp11
+
+declare
+
+v_user varchar2(10);
+
+begin
+
+select user into v_user from dual;
+
+if inserting then
+dbms_output.put_line('record is inserted by : '||v_user);
+
+elsif updating then
+dbms_output.put_line('record is updated by :'||v_user);
+
+else
+dbms_output.put_line('record is deleted by :'||v_user);
+
+end if;
+end;
+/
+
+to list all the triggers:
+=========================
+
+select trigger_name,trigger_type from user_triggers;
+
+
+to drop a trigger:
+==================
+
+drop trigger triggername;
+
+
+Exercise 2:
+===========
+
+1) create a table emp12 (empno,ename,sal)
+
+2)CREATE A TRIGGER named as (trgg_1) on emp12 if user  before insert or delete or update any record
+into a table a trigger action(inserted record by user) to be performed 
+using ROW LEVEL triggers.
+
+3)insert the multiple records into emp12 tables using procedure .
+  check it how many times the trigger is fired.
+
+
+sol:
+====
+
+create table emp12 (empno number(5),ename varchar(20),sal number(10));
+
+2)
+
+ create or replace trigger trgg_1
+ before insert or update or delete on emp12
+ 
+ for each row        -- row level trigger
+
+ declare
+ v_user varchar2(10);
+
+ begin
+
+  select user into v_user from dual;
+
+  if inserting then
+   dbms_output.put_line('record is inserted by '||v_user);
+
+  elsif updating then
+    dbms_output.put_line('record is updated by '||v_user);
+  else 
+
+    dbms_output.put_line('record is deleted by '||v_user);
+
+  end if;
+
+  end;
+
+
+3) create or replace procedure emp12_insert
+  is
+  
+  begin
+
+  insert into emp12 values(1001,'smith',3000);
+
+  insert into emp12 values(1002,'martin',4000);
+  
+  insert into emp12 values(1003,'john',5000);
+  
+  insert into emp12 values(1004,'scott',2000);
+ 
+  end;
+
+  /
+
+
+4) call the procedure
+
+ execute emp12_inser
+
+
+1)create   a procedure to insert into emp11 table
+  insert three records;
+
+sol:
+----
+
+create or replace procedure emp11_insert
+is
+
+begin
+
+insert into emp11 values(1020,'sasa',3000);
+
+insert into emp11 values(1020,'sasa',3000);
+
+insert into emp11 values(1020,'sasa',3000);
+
+commit;
+
+
+end;
+
+/
+
+
+2) create a trigger on emp11 before update  
+the trigger action to performed('record updated by user);
+
+sol:
+====
+
+create or replace trigger emp11_udate
+before update 
+on emp11
+declare
+
+v_user varchar2(10);
+
+begin
+
+select user into v_user from dual;
+
+dbms_output.put_line('record updated by '||v_user);
+
+end ;
+
+/
+
+
+3)
+a) create a table or copy a table emp12(empno,ename,sal) from emp;
+ 
+b)create a trigger on emp12  before update
+   the trigger action is to perform for every row (updated by user).
+
+c)update a record ename columns where sal equal to 5000;
+
+
+
+
+
+exercise:
+========
+4) 
+a) create a table or copy a table emp13(empno,ename,sal) from 
+    emp with out data; 
+-- create table emp13 as select empno,ename,sal from emp where 1=2;
+
+b) create a trigger at row level  on emp13 
+   when try to insert a record  before into table
+   convert ename in uppercase and store into table.
+
+ note:
+-------
+ to read the values before insert into table in trigger
+ we need to use :new.columname
+sol:
+====
+create or replace trigger trg_2
+before insert on emp13
+
+for each row
+
+begin
+
+:new.ename:=upper(:new.ename);
+
+end;
+
+/
+
+
+
+
+5)create a trigger when user try to update a record 
+ at rowlevel before update the record ,we need to store
+ history of emp13 in another table emp_backup_update(old_ename,new_ename).
+
+note:
+-----
+
+first create a back table to store the history
+
+create table emp13_backup_update
+(old_ename varchar2(10),new_ename varchar2(10),
+old_sal number(10,2),
+new_sal number(10,2));
+
+sol:
+====
+
+create or replace trigger trg_emp13_update
+before update on emp13
+
+for each row
+begin
+
+insert into emp13_backup_update values
+(:old.ename,:new.ename,:old.sal,:new.sal);
+
+end;
+/
+
+
+
+
+6) 
+  a) create a table emp_delete
+     sol:
+     ---
+   create table emp_delete(old_empno number(5),
+          old_ename varchar2(10),old_sal number(10,2));
+ 
+                                     
+b)create a  trigger when try to delete a record from emp13
+  before delete ,the deleted record information(history or backup)
+  store into another table emp_delete(old_empno,old_ename,old_sal).
+
+sol:
+=====
+
+create or replace trigger trg_emp_delete
+before delete on emp13
+
+for each row
+
+begin
+
+insert into emp_delete values(:old.empno,:old.ename,:old.sal);
+
+end;
+
+/
+
+
+
+
+7)create a trigger which pperfrom auditing on employee table
+
+base table:
+-----------
+create table employee(ename varchar2(10),city varchar2(10));
+
+audit tables on employee:
+=========================
+
+1)inserting backup table on employee
+--------------------------------------
+
+create table emp_audit_insert(ename varchar2(20),city varchar2(20),
+operation varchar2(10),in_date date);
+
+
+2)updating backup data on emloyee table:
+=========================================
+
+create table emp_audit_update(
+        old_ename varchar2(20),new_ename varchar2(20),
+	old_city varchar2(20),new_city varchar2(20),
+        operation varchar2(10),
+        v_date date);
+
+3)deleting backup data on employee table:
+==========================================
+
+create table emp_audit_delete(
+                   ename varchar2(20),
+                   city varchar2(20),
+                   operation varchar2(10),
+                    v_date date);
+
+note:
+====
+create a before trigger on employee to backup insert,update and delete (DML)events for each row (row level)
+using conditional statements like inserting,updating,deleteing and to compare old and new columns values
+we need to use :new ,:old  pseudo-columns.
+sol:
+=====
+create or replace trigger  trg_aduit
+
+before insert or update or delete on  employee
+
+for each row
+
+declare
+
+opera varchar2(10);
+
+begin
+
+if inserting  then
+
+  opera:='insert';
+
+  insert into emp_audit_insert values
+           (:new.ename,:new.city,opera,sysdate);
+
+elsif updating then
+
+   opera:='update';
+
+   insert into emp_audit_update values
+              (:old.ename,:new.ename,:old.city,:new.city,opera,sysdate);
+else
+   
+   opera:='delete';
+  
+   insert into emp_audit_delete values
+          (:old.ename,:old.city,opera,sysdate);
+
+end if;
+
+end;
+/
+
+
+
+INSTEAD OF TRIGGERS:
+====================
+INSTEAD OF TRIGGERS IS USED TO CONTROL THE DEFAULT BEHAVIOUR
+OF DML OPERATIONS LIKE INSERT,UPDATE,DELETE ON VIEWs
+BUT NOT on TABLES.
+
+
+SYNTAX:
+========
+CREATE OR REPLACE TRIGGER TRIGGERNAME
+INSTEAD OF  [INSERT OR UPDATE OR DELETE] ON <VIEW-(COMPLEXVIEW)>
+FOR EACH ROW                         -- AT ROW LEVEL
+DECLARE
+<DELACER OF VARIABLE STATEMENTS>;
+
+BEGIN
+
+<TRGIGGER BODY>;
+
+
+EXCEPTION
+
+ WHEN EXCEPTION_NAME THEN
+ DBMS_OUTPUT.PUT_LINE('MESSAGE');
+
+END; OR END TRIGGERNAME;
+
+/
+
+EXAMPLE:
+========
+
+1) CREATE A COMPLEX VIEW USING TWO TABLES COURSE AND STUDENT
+   NOTE:
+    ----
+  CID,CNAME,Fee FROM COURSE-- CREATE A TABLE IF NOT Exists
+  SID,SNAME,CITY,CID FROM STUDENT
+
+
+2) CREATE A TRIGGER TO PERFORM DML OPERATIONS ON COMPlex VIEW (v_cx_c_S).
+
+
+SOL:
+====
+BASETABLE TABLES:
+============
+CREATE TABLE COURSE(CID NUMBER(4),CNAME VARCHAR(10),FEE NUMBER(5));
+CREATE TABLE STUDENT(SID NUMBER(4),SNAME VARCHAR(10), CID NUMBER(4));
+
+1)ANS:-
+=========
+creating a complex view:
+-----------------------
+CREATE or replace VIEW V_CX_C_S AS SELECT C.CID,C.CNAME,S.SID,S.SNAME,S.CITY FROM 
+COURSE C JOIN STUDENT S ON C.CID=S.CID;
+
+2)ANS:-
+=======
+CREATE OR REPLACE TRIGGER TRG_ON_VIEW
+INSTEAD OF INSERT OR UPDATE OR DELETE ON V_CX_C_S  -- we are creating trigger on complex view.
+FOR EACH ROW
+BEGIN
+
+IF INSERTING THEN
+
+INSERT INTO COURSE(CID,CNAME) VALUES(:new.cid,:NEW.CNAME);
+INSERT INTO STUDENT(SID,SNAME,CITY,CID) VALUES
+ (:NEW.SID,:NEW.SNAME,:new.CITY,:new.CID);
+
+ELSIF UPDATING THEN
+UPDATE COURSE SET CNAME=:NEW.CNAME WHERE CID=:OLD.CID;
+
+UPDATE STUDENT SET SID=:NEW.SID,SNAME=:NEW.SNAME,CITY=:New.CITY WHERE
+                     CID=:OLD.CID;
+ELSE
+
+DELETE FROM COURSE WHERE CID=:OLD.CID;
+DELETE FROM STUDENT WHERE CID=:OLD.CID;
+
+END IF;
+
+END;
+
+/
+/
+
+mutating trigger/mutating error:
+=================================
+When we perform two DML operations at onces then it leads to 
+ Trigger Mutating .
+
+If trigger applied on table1 (before insert on table1) performing 
+any other DML or DRL on same table(table1) in
+trigger body causes  Mutating Error .
+
+when try to create a trigger on table,
+inside trigger body if you perform dml operation on same trigger table. 
+then we will get mutating trigger/function error.
+
+ex:
+---
+
+1)create table marks(mid number(4), sname varchar2(10),m1 number(4),
+                 m2 number(4),m3 number(4),total number(5),
+                           avg number(5));
+
+2) create a trigger after insert into marks table
+     perform total and avg by using update command for each  row.
+
+sol:
+=====
+create or replace trigger trg_marks
+after insert on marks                                      --trigger on table
+for each row
+begin
+
+update marks set total=m1+m2+m3,avg=(m1+m2+m3)/3;    --trigger body
+
+end;
+/
+
+note:
+=====
+when try to insert record into marks table it will display
+mutating trigger/function error --
+
+
+
+1) to resolve the mutating trigger error:
+=========================================
+ 
+
+a)first we need to create the trigger based on after with 
+   statement level.
+
+sol
+===c
+create or replace trigger trg_marks
+after insert on marks
+begin
+
+update marks set total=m1+m2+m3,avg=(m1+m2+m3)/3;
+
+end;
+
+/
+
+b)we need to create a trigger based on before with  for each row.
+
+sol:
+====
+
+create or replace trigger trg_marks
+before insert on marks
+
+for each row
+
+begin
+
+:new.total:=:new.m1+:new.m2+:new.m3;
+
+:new.avg:=(:new.m1+:new.m2+:new.m3)/3;
+
+end;
+
+/
+
+
+syntax to enable or disbale a trigger:
+======================================
+alter trigger triggerName [disable/Enable];
+
+
+
+
+COLLECTION:
+============
+ 
+COLLECTION is an ARRAY IS USED TO STORE SIMILAR TYPES OF DATA(HOMOGENIOUS)
+         ARRAYS IS USED TO STORE ELEMENTS IN CONTIGUOUS MEMORY LOCATION.
+
+A collection is a group of elements of homogenous data types. 
+It generally comprises arrays, lists, sets, and so on. 
+
+Each of the elements has a particular subscript which reflects its position.
+
+NOTE:
+=====
+
+COLLECTION INDEX IS ALSO CALLED AS SUBSCRIPT.
+
+COLLECTION INDEX STARTS FROM 1
+
+
+THERE ARE THERE TYPES:
+=====================
+1)VARRAY
+2)INDEX BY TABLE OR ASSOCIATE ARRAYS
+3)NESTED TABLES
+
+
+1)VARRAY:
+----------
+
+VARRAY STANDS FOR VARIABLE-SIZE ARRAY OR VARYING ARRAY TO STORE
+SIMILAR TYPE OF DATA BUT SIZE OF VARRAY IS FIXED.
+
+VARRAY MUST BE DELCARE AND INITIALIZE OR 
+CREATE OBJECT USING CONSTRUCTOR.
+
+
+SYNTAX:
+=======
+
+--DECLARATION OF VARRRAY TYPE
+
+TYPE TYPE_NAME IS VARRAY(SIZE) OF <ELEMENT OF DATA TYPE TO STORE>;
+
+--DELCARE A VARIABLE OF TYPE VARRAY
+
+variablename   TYPE_NAME
+
+
+EX:
+====
+
+CREATE A PROCEDURE TO STORE MULTIPLE INTEGER VALUES IN
+VARRAY TYPE VARIABLE AND DISPLAY THE ELEMENTs FROM VARIABLE.
+
+EX:
+===
+
+CREATE OR REPLACE PROCEDURE T_VAR
+IS
+
+TYPE V_ENO  IS VARRAY(10) OF NUMBER;       --DECLARATION OF datatype VARRRAY TYPE
+
+V_NO V_ENO :=V_ENO(10,20,30,40,50);        --DELCARE A VARIABLE OF TYPE VARRAY
+
+BEGIN
+
+DBMS_OUTPUT.PUT_LINE(V_NO(1));              --IT WILL DISPLAY FIRST INDEX VALUE
+
+DBMS_OUTPUT.PUT_LINE(V_NO.COUNT);          -- IT WILL DISPLAY NO ELEMENTS IN VARIABLE
+
+DBMS_OUTPUT.PUT_LINE(V_NO.LIMIT);         -- IT WILL DISPLAY SIZE OF VARRAY
+
+DBMS_OUTPUT.PUT_LINE(V_NO.FIRST);          -- IT WILL DISPLAY FIRST INDEX 
+
+DBMS_OUTPUT.PUT_LINE(V_NO.LAST);             -- IT WILL DISPLAY LAST INDEX STORED
+
+
+FOR I IN 1..V_NO.COUNT LOOP
+
+DBMS_OUTPUT.PUT_LINE(V_NO(I));
+
+END LOOP;
+
+END;
+
+/
+
+
+
+
+1) create a procedure to store some string values into varray variable
+
+note:
+-----
+extend:
+--------
+This procedure has three forms.
+EXTEND appends one null element to a collection. 
+EXTEND(n) appends n null elements to a collection. 
+
+ex:
+===
+create or replace procedure t_varray
+is
+type ename_data is varray(10) of varchar2(10);
+
+v_ename ename_data:=ename_data();      
+
+begin
+v_ename.extend;
+v_ename(1):='raju';
+v_ename.extend;
+v_ename(2):='smith';
+v_ename.extend(5);
+v_ename(3):='martin';
+v_ename(4):='sindhu';
+v_ename(5):='harsha';
+v_ename(6):='laxmi';
+v_ename(7):='srileka';
+v_ename.extend(3);
+
+v_ename(8):='balayya';
+v_ename(9):='deeraj';
+v_ename(10):='sravani';
+
+dbms_output.put_line(v_ename.count);
+v_ename.trim(4);  --it will remove the last four elements.
+
+dbms_output.put_line(v_ename.count);
+
+for i in v_ename.first..v_ename.last loop
+dbms_output.put_line(v_ename(i));
+end loop;
+end;
+/
+
+
+
+
+EXAMPLE2:
+=========
+CREATE A  PROCEDURE TO GET ALL ENAMES FROM EMP TABLE
+AND STORE THESE ENAME VALUES INSIDE VARRAY TYPE VARIABLE
+AND DISPLAY THE ELEMENTS FROM VARRAY VARIABLE.
+
+sol:
+====
+create or replace procedure t_varray_ename
+is
+cursor c1 is select ename from emp;
+
+type ename_varray is varray(20) of varchar2(10);
+
+v_ename ename_varray:=ename_varray(); --initialize the varray
+
+v_index number:=1;
+
+begin
+
+for i in c1 loop
+
+v_ename.extend;
+v_ename(v_index):=i.ename;         --store into varray variable;
+v_index:=v_index+1;
+
+end loop;
+
+for i in v_ename.first..v_ename.last loop
+dbms_output.put_line(v_ename(i));
+end loop;
+end;
+/
+
+
+
+
+2)INDEX BY TABLE OR ASSOCIATE ARRAY:
+=====================================
+
+INDEX BY TABLE IS  USED TO STORE SIMILAR TYPE OF DATA
+AND IT HAS NO LIMIT TO STORE THE ELEMENTS(UNBOUNDED).
+
+ELEMENTS ARE INSERTED INDEX BASED ON NON-SEQUENTIALLLY INTEGER OR
+NEGATIVE OR Character(single or multiple).
+
+index by table does not require initilaze.
+
+INDEX BY TABLE IS NON-PERSISTANCE OBJECT WE CAN USE THIS
+IN PLSQL ONLY.
+
+WE CAN DELETE A INDIVIAL ELEMENTS.
+
+SYNTAX:
+=======
+
+TYPE TYPE_NAME IS TABLE OF <ELEMENT OF DATATYPE> INDEX BY <DATATYPE>;
+
+VARIABLE TYPE_NAME;
+
+
+EXAMPLE:
+========
+
+CREATE A PROCEDURE TO DELCARE A COLLECTION VARIABLE OF TYPE
+INDEX BY TABLE AND STORE SOME VALUES OF TYPE INTEGER AND
+DISPLAY THE VALUES FROM THAT INDEX BY TABLE OBJECT.
+
+SOL:
+=====
+CREATE OR REPLACE PROCEDURE EX_IN_BY_T
+IS
+TYPE MARKS_INT IS TABLE OF NUMBER INDEX BY BINARY_INTEGER;
+    
+                                  --EXPLICITLY SPECIFY THE INDEX TO STORE
+V_M MARKS_INT;  --created variable type of Index by table.
+
+v_n number;
+
+BEGIN
+V_M(1):=10;
+V_M(2):=40;
+V_M(3):=50;
+V_M(4):=60;
+V_M(5):=80;
+
+FOR I IN V_M.FIRST..V_M.LAST LOOP
+
+DBMS_OUTPUT.PUT_LINE(V_M(I));
+
+END LOOP;
+
+dbms_output.put_line('displaying the elements with whileloop');
+
+v_n:=V_M.first;
+
+while v_n is not null loop
+
+dbms_output.put_line(V_M(v_n));
+
+v_n:=V_M.next(v_n);
+
+end loop;
+
+END;
+
+/
+
+
+EXAMPLE:
+========
+CREATE A PROCEDURE TO DELCARE A COLLECTION VARIABLE OF TYPE
+INDEX BY TABLE AND STORE SOME VALUES OF TYPE INTEGER AND
+DISPLAY THE VALUES FROM THAT INDEX BY VARCHAR2.
+
+SOL:
+=====
+
+CREATE OR REPLACE PROCEDURE EX_IN_BY_v
+IS
+
+TYPE MARKS_INT IS TABLE OF NUMBER INDEX BY VARCHAR2(3);               
+                    --EXPLICITLY SPECIFY THE INDEX TO STORE
+V_M MARKS_INT;
+v_n varchar2(3);
+BEGIN
+
+V_M('AAA'):=10;
+V_M('BBB'):=40;
+V_M('CCC'):=50;
+V_M('DDD'):=60;
+V_M('EEE'):=80;
+
+DBMS_OUTPUT.PUT_LINE(V_M('AAA')); --10
+
+--display the elements using while loop
+dbms_output.put_line('Displaying the elements using while loop');
+
+v_n:= V_M.first;
+
+while v_n is not null loop
+dbms_output.put_line(V_M(v_n));
+
+v_n:=V_M.next(v_n);
+end loop;
+END;
+/
+
+NESTED TABLE:
+=============
+NESTED TABLES IS LIKE A DATABASE TABLE WHICH HAS NO LIMIT TO STORE
+ELEMENTS.
+
+ELEMENTS ARE INSERTED WTIH THE START INDEX 1.
+
+NESTED TABLE VARIABLE MUST BE DECLARE AND INITIALIZE.
+
+IN NESTED TABLE WE CAN DELETE INDIVIDUAL ELEMENT
+
+WE USE THIS NESTED TABLE IN SQL AS WELL AS PLSQL.
+
+EXTEND IS A METHOD TO ADD A EMPTY SPACE TO INSERT AN ELEMENT
+THIS MUST BE THE FIRST .
+
+
+SYNTAX:
+========
+
+TYPE TYPE_NAME IS TABLE OF <ELEMENT DATATYPE>;
+
+VARIABLNAME TYPE_NAME:=TYPE_NAME();---EMPTY INITIALIZATION
+
+OR
+
+VARIABLNAME TYPE_NAME:=TYPE_NAME(VALUES,...VALUES);---INITIALIZATION
+
+
+EXAMPLE1:
+==========
+
+
+CREATE PROCEDURE TO DELCARE COLLECTION VARIABLE OF TYPE NESTED TABLE
+AND STORE STRING ELEMENTS INSIDE THAT VARIABLE
+AND DISPLAY THE ELEMENTS FROM NESTED TABLE VARIABLE
+AND PERFROM ALL OPERTAIONS USING COLLECTION METHODS.
+
+SOL:
+====
+CREATE OR REPLACE PROCEDURE EX_ON_NT
+IS
+TYPE  NESTED_VARCHAR IS TABLE  OF VARCHAR2(10);
+
+V_NAME NESTED_VARCHAR:=NESTED_VARCHAR();--DECLARE AND INITIAIZE
+
+BEGIN
+V_NAME.EXTEND(10);
+V_NAME(1):='SMITH';
+V_NAME(2):='HARSHA';
+V_NAME(3):='VIJAY';
+V_NAME(4):='LAXMI';
+V_NAME(5):='DIVYA';
+V_NAME(6):='SUPRIYA';
+V_NAME(7):='KOKILA';
+V_NAME(8):='VEDA';
+V_NAME(9):='PADMINI';
+V_NAME(10):='ABINAV';
+
+DBMS_OUTPUT.PUT_LINE(V_NAME.COUNT);--10
+DBMS_OUTPUT.PUT_LINE(V_NAME.FIRST);--1
+DBMS_OUTPUT.PUT_LINE(V_NAME.LAST);-- 10
+DBMS_OUTPUT.PUT_LINE(V_NAME.LIMIT);--null
+ 
+FOR I IN V_NAME.FIRST..V_NAME.LAST LOOP
+ DBMS_OUTPUT.PUT_LINE(V_NAME(I));
+END LOOP;
+
+V_NAME.DELETE(1);--smith
+
+DBMS_OUTPUT.PUT_LINE('AFTER DELETE COUNT IS '||V_NAME.COUNT);--9
+
+FOR I IN V_NAME.FIRST..V_NAME.LAST LOOP
+ DBMS_OUTPUT.PUT_LINE(V_NAME(I));
+  END LOOP;
+END;
+/
+
+
+EXAMPLE:
+========
+
+CREATE A PROCEDURE TO DELCARE A COLLECTION VARIABLE OF NESTED TYPE
+AND GET ALL RECORD  FROM EMP AND STORE EMPNO,ENAME,SAL COLUMN
+ VALUES INSIDE NESTED TYPE VARIABLE AND DISPLAY THE VALUES
+FROM THE NESTED TYPE VARIABLE.
+
+
+SOL:
+====
+
+
+CREATE OR REPLACE PROCEDURE EX_ON_NT_EMP
+IS
+
+TYPE ALL_EMP IS TABLE OF EMP%ROWTYPE;
+V_RES ALL_EMP:=ALL_EMP();
+
+CURSOR C1 IS SELECT * FROM EMP;
+
+V_INDEX  NUMBER:=1;
+
+BEGIN
+
+FOR I IN C1 LOOP
+V_RES.EXTEND;
+
+SELECT * INTO V_RES(V_INDEX) FROM EMP
+WHERE EMPNO=I.EMPNO;
+
+V_INDEX:=V_INDEX+1;
+
+END LOOP;
+
+FOR I IN V_RES.FIRST..V_RES.LAST LOOP
+
+DBMS_OUTPUT.PUT_LINE(V_RES(I).EMPNO||' '||V_RES(I).ENAME
+                      ||''||V_RES(I).SAL);
+END LOOP;
+END;
+/
+
+
+collections methods:
+====================
+
+COUNT
+------
+Returns the number of elements that a collection currently contains, 
+which is useful because the current size of a collection is not always known. You can use COUNT wherever an integer expression is allowed. For varrays, COUNT always equals LAST. For nested tables, normally, COUNT equals LAST. But, if you delete elements from the middle of a nested table, COUNT is smaller than LAST.
+
+DELETE
+------
+This procedure has three forms. 
+DELETE removes all elements from a collection. 
+DELETE(n) removes the nth element from an associative array or
+ nested table. If n is null, DELETE(n) does nothing.
+ DELETE(m,n) removes all elements in the range m..n from 
+an associative array or nested table. 
+If m is larger than n or if m or n is null, DELETE(m,n) does nothing.
+
+EXISTS
+-------
+EXISTS(n) returns TRUE if the nth element in a collection exists.
+ Otherwise, EXISTS(n) returns FALSE.
+ Mainly, you use EXISTS with DELETE to maintain sparse nested tables.
+ You can also use EXISTS to avoid raising an exception 
+  when you reference a nonexistent element. 
+  When passed an out-of-range subscript, EXISTS returns FALSE instead of raising SUBSCRIPT_OUTSIDE_LIMIT.
+
+EXTEND
+=-----=
+
+This procedure has three forms.
+EXTEND appends one null element to a collection. 
+EXTEND(n) appends n null elements to a collection. 
+EXTEND(n,i) appends n copies of the ith element to a collection. 
+EXTEND operates on the internal size of a collection. 
+If EXTEND encounters deleted elements, 
+it includes them in its tally. 
+You cannot use EXTEND with associative arrays.
+
+FIRST, LAST
+------------
+
+FIRST and LAST return the first and last (smallest and largest)
+subscript values in a collection. 
+The subscript values are usually integers, 
+but can also be strings for associative arrays. 
+If the collection is empty, FIRST and LAST return NULL. 
+If the collection contains only one element, 
+
+FIRST and LAST return the same subscript value.
+
+For varrays, FIRST always returns 1 and LAST always equals COUNT. 
+For nested tables, normally, LAST equals COUNT. 
+But, if you delete elements from the middle of a nested table, 
+LAST is larger than COUNT.
+
+
+LIMIT
+-----
+
+For nested tables, which have no maximum size, 
+LIMIT returns NULL. 
+For varrays, LIMIT returns the maximum number of elements 
+that a varray can contain 
+(which you must specify in its type definition).
+
+NEXT, PRIOR
+------------
+PRIOR(n) returns the subscript that precedes index n in a collection. 
+NEXT(n) returns the subscript that succeeds index n. 
+If n has no predecessor, PRIOR(n) returns NULL. 
+Likewise, if n has no successor, NEXT(n) returns NULL.
+
+TRIM
+----
+
+This procedure has two forms. 
+TRIM removes one element from the end of a collection.
+ TRIM(n) removes n elements from the end of a collection. 
+If n is greater than COUNT, TRIM(n) raises SUBSCRIPT_BEYOND_COUNT. 
+You cannot use TRIM with index-by tables.
+TRIM operates on the internal size of a collection. 
+If TRIM encounters deleted elements, it includes them in its tally.
+
+
+*Execute immediate:
+====================
+One can call DDL statement like create, drop, truncate and etc from PL/SQL by using the 
+ Execute immediate  statement.
+
+Ex:
+
+Begin
+Execute immediate 'drop table dept_U1'; 
+
+END;
+/
+
+Begin
+
+Execute immediate 'Truncate table emp_11; 
+
+END;
+/
+
+
+
+
+*BULK COLLECT:
+===============
+Bulk collect feature helps in improving the performance of explicit cursor programs. 
+Fetch statement can fetch all the rows from the cursor to the programs local variable(collection variable) 
+at once thus helps in improving the performance.
+
+Ex:
+---
+
+Declare
+
+Type string_array is varray(20) of varchar2(20); --creating collection variable
+
+L_ename string_array;
+
+Cursor c1 Is select ename from emp; 
+
+Begin
+
+Open c1;
+
+Fetch c1 bulk collect into L_ename;  --fetching at a time all records into collection variable.
+
+Close c1;
+
+For i in L_ename.first .. L_ename.last loop 
+
+DBMS_OUTPUT.PUT_LINE(L_ename(i));
+
+END loop; 
+
+END;
+/
+ 
+
+
+
+
+SQL * loader:
+--------------
+SQL loader is a tool which is use to load the data from the file to the table.
+ 
+This tool requires control file(.Ctl).
+
+Control file contains all the information about source and destination. 
+
+It is developer responsibility to create a control file.
+
+Syntax to create control file:
+------------------------------
+LOAD data
+Infile '<Data filepath>'
+Insert into table <Table_name> fields Terminated by ',' (col1, col2, ., clon)
+
+Steps to invoke the tool:
+-------------------------
+Step 1: open the command prompt. 
+Step 2: >SQLLDR Lti/lti CONTROL=E:\SUNIL\Load.CTL
+
+
+Example:
+--------
+
+source:
+-------
+student_data.txt
+----------------
+101,smith,90
+102,martin,100
+103,rakesh,95
+104,mukesh,90
+
+target/destination:
+-------------------
+create table student50(sno number(3),sname varchar2(10),
+marks number(3));
+
+Query: create a control file to insert the records from student_data.txt into table
+student50 using SqlLoader?
+
+sol:
+---
+Ex:Load.CTL
+------------
+LOAD data
+INFILE 'G:\demo\student_data.txt'
+Insert into table student50 fields terminated by ',' (sno,sname,marks)
+
+executing the load file:
+=========================
+SQLLDR Lti/lti CONTROL=G:\demo\Load.CTL  --in CMD(commandLine)
+
+
+
+*REF CURSOR:
+--------------
+A ref cursor is basically a data type.
+
+A variable created based on such a data type is generally
+called a cursor variable.
+
+A ref cursor can be associated with more than one select statement 
+at run time.
+Before associating a new select statement.we need to close the cursor.
+
+Ex:
+----
+Declare
+
+Type r_cursor is REF cursor;
+
+c_emp r_cursor;
+
+en  emp.ename%type; 
+sal emp.sal%type;
+
+begin
+
+open c_emp for select ename, sal from emp where deptno = 10; 
+
+DBMS_OUTPUT.PUT_LINE('department: 10'); 
+DBMS_OUTPUT.PUT_LINE('	');
+
+Loop
+
+Fetch c_emp into en,sal;
+
+Exit when c_emp%notfound; 
+
+DBMS_OUTPUT.PUT_LINE(en||'	'||sal);
+
+End loop; 
+
+Close c_emp; --closing first operation
+
+Open c_emp for select ename, sal from emp where deptno = 20;
+
+DBMS_OUTPUT.PUT_LINE('department: 20'); 
+
+DBMS_OUTPUT.PUT_LINE('	');
+
+Loop
+
+Fetch c_emp into en,sal;
+
+Exit when c_emp%notfound; 
+
+DBMS_OUTPUT.PUT_LINE(en||'	'||sal);
+
+End loop;
+
+Close c_emp; 
+
+END;
+/
+
+
+Autonomous transactions:
+========================
+In general a commit/rollback command used in a PL/SQL block will act 
+globally and make all the changes permanent.
+
+To restrict commit/rollback command to a specific program
+we need to make the PL/SQL block autonomous.
+
+We can create autonomous PL/SQL block by 
+using 'PRAGMA AUTONOMOUS_TRAN SACTION' in the declare section.
+
+PRAGMA autonomous_transaction is a compiler directive.
+
+Example:
+--------
+Create table student20(sno number(3), sname varchar2(10), marks number(3)); 
+
+Insert into student20 values(101,'Arun',40)
+Insert into student20 values(102,'Arun',40) 
+
+Declare
+
+Pragma autonomous_transaction; 
+
+Begin
+
+Insert into item values(103,'idly',35); 
+
+Insert into item values(104,'paraota',84); 
+
+commit;
+
+END;
+ 
+/
+
+Abstract datatypes:
+==================
+Abstract data types are consists of one or more subtypes. 
+
+Rather than being constrained to the standard oracle data types of number, date and varchar2 data types can more accurately describe your data.
+
+Ex:
+SQL> create type person_ty5 as object
+               (name varchar2(20), Address varchar2(20));
+                  /
+
+SQL> create table customer5
+            (customer_ID number(3), Person person_ty5);
+
+SQL> insert into customer5 values
+     (1,person_ty5('hari','BBS')); 
+
+SQL> select customer_ID, c.person.name from customer5 c;
+
+Managing large ob¡ects:
+============================
+*Creating table with LDB columns:(blob)
+
+Ex: 
+
+create table airbus_desc5(airbusno char(5), airbus_det bfile, airbus_profile clob);
+
+*Insert values in lobs: 
+ To insert values in the bfile, the function bfilename is used.
+ It takes the os path of the directory and the name of the file.
+
+Ex:
+ 
+Insert into airbus_desc5 values
+('ABO1', bfilename('D:\','flower.jpg'), 'the description about flower is red ');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

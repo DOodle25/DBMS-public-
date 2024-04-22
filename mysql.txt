@@ -1,0 +1,4579 @@
+What is a Database?
+
+A Data Base is an Organized Collection of Data which can be easily
+accessed, managed and updated.
+In today’s World, Data plays a vital role in every business. In our day to day life, we see or
+interact with many applications and Software’s, every application that we see or work with will
+have two parts:
+
+1. GUI (Graphical User Interface / Front end)
+2. Database
+
+To keep it simple GUI is the part where user interacts with (like Facebook applications – look
+and feel) and the Data that we see in the application (like Facebook profile, messages, images
+and videos) are pulled from Database.
+
+
+End User who interacts with the application may not know how the data is being fetched and
+where so much of information is stored. Internally all the dynamic content that we see in the
+application is fetched from Database.
+
+Database and all its components should be designed and configured at the time of application
+development. Once the application is developed we will not be able to make changes to the
+database structure as every change will hugely affect the business application GUI code.
+It is very important to make sure that data is securely maintained and accurately stored. 
+
+So to maintain security and accuracy in database a set of rules / software system is defined and that
+we call it as DBMS (Data Base Management System – which performs all the operations on the
+database)
+
+What is DBMS?
+
+DBMS (Database Management System) is a software tool that is used to store and manage data
+in the Database.
+
+A database management system contains a set of programs that control the creation,
+maintenance, and use of a database. Like:
+
+Adding new data to the table.
+Modifying existing data.
+Deleting unwanted data.
+
+DBMS allows different user application programs to concurrently access the same database.
+Before Database and DBMS were introduced, traditional approach was to store data in flat files
+(physical files in system) but there were some disadvantages with it.
+
+What is RDBMS?
+A relational database management system (RDBMS) is a Database Management System
+(DBMS) that is based on the relational model introduced by E. F. Codd and most popular 
+databases currently in use are based on the relational database model. To put in different 
+words RDBMS is built on top of in which data is stored in tables and the relationships among 
+the data are maintained. The data stored in a table is organized into rows and columns. Each 
+row in a table represents an individual record and each column represents a field. A record is 
+an individual entry in the database.
+
+Difference between DBMS and RDBMS
+----------------------------------
+For example, consider the database which stores employee information. 
+In DBMS, all details like empno, ename, job, salary, deptno, dname, location, street, city, state, phone will 
+be stored in a single table. 
+
+But in RDBMS, the data model will be designed in such a way that 
+like the empno, ename, job, salary and deptno will be stored in emp table and deptno, dname, location will be stored in dept table and location, street, city, state, phone will be stored under locations table. 
+
+Any information to be obtained is done by properly relating the ‘emp’, ‘dept’ 
+and ‘locations’ tables.
+
+
+
+
+SQL:
+====
+SQL stands for Structured Query Language. 
+
+It is used for storing and managing data in relational database management system (RDMS).
+
+It is a standard language for Relational Database System. It enables a user to create, 
+read, update and delete relational databases and tables.
+
+All the RDBMS like MySQL, Informix, Oracle, MS Access and SQL Server use SQL as their
+standard database language.
+SQL allows users to query the database in a number of ways, using English-like statements.
+
+Rules:
+SQL follows the following rules:
+
+Structure query language is not case sensitive. 
+Generally, keywords of SQL are written in uppercase.
+Statements of SQL are dependent on text lines. 
+We can use a single SQL statement on one or multiple text line.
+Using the SQL statements, you can perform most of the actions in a database.
+
+  sql stands for structure query language designed for
+accessing and managing the data in the RDBMS
+
+Sql act as interface between user and database.
+
+why sql ?
+=========
+
+Sql can retrieve records from the database.
+
+sql can insert record into the database
+
+sql can update record in to a database
+
+sql can provides privileges to pprocedures,functions,
+views, sequences----database objects
+
+
+Sql is divided into five categories:
+====================================
+
+DDl --DATA  DEFINITION LANGUAGE     
+-------------------------------
+CMDS:CREATE,ALTER,TRUNCATE,DROP,RENAME
+
+which deals with database schemas and descriptions, of how the data should reside in the database.
+                            
+DML -- DATA MANIPULATION LANGUAGE
+-----------------------------------
+
+CMDS:INSERT,UPDATE,DELETE
+
+which deals with data manipulation and includes most common SQL statements such 
+INSERT, UPDATE, DELETE, etc., and it is used to store, modify, retrieve, delete and update data in a database.
+
+DCL -- DATA CONTROL LANGUAGE
+-----------------------------
+GRANT,REVOKE
+
+TCL -- TRANSACTION CONTROL LANGUAGE
+-------------------------------------
+COMMIT,ROLLBACK,SAVEPOINT
+
+DRL -- DATA RETRIVEAL LANGUAGE
+------------------------------
+SELECT
+
+ Oracle Datatypes:
+ =================
+
+ Number[(p,s)]:-  this data is used to store numeric data
+                   maxisize we can store up to 38 digits
+                
+                 p--precision
+                 s--scale
+  ex:
+  ====
+
+  empno number
+ 
+  empno number(5)
+
+  sal  number(10,3); -- 10 is precision and 3 is scale.
+ 
+
+  Example:
+  =======
+   The precision is the number of digits in a number. It ranges from 1 to 38.
+   The scale is the number of digits to the right of the decimal point in a number. 
+    It ranges from -84 to 127.
+   
+   For example, the number 1234.56 has a precision of 6 and a scale of 2.
+   So to store this number, you need NUMBER(6,2).
+
+
+
+
+  char[(size)] :-  this is used to store fixed characters
+                  maximum size is 2000 bytes.
+
+  nchar[(size)] :-  this data type is used to store  
+                 national characters ,maxmimum size is 2000 bytes.
+
+  varchar(size) :- this data type is used to string type of data.
+                  maximum size is 2000 bytes.
+
+  varchar2(size) :-- this datda type is used to store string type of data
+                    maximum size is 4000 bytes.
+
+ Difference varchar(size) and varchar2(size):
+ ============================================
+
+ ex:
+  ===
+
+ ename varchar(10);                 ename varchar2(10);
+ suppose a user
+ enter smith			     suppose user
+ interanlly                             enter  smith
+         
+                                     internally the sql egine 
+ it will allocate                     will allocate the 
+ memory based on                      memory based on user 
+                                     enter value.
+ variable datatype size
+                                       ------
+----------			       smith
+smithnnnnn
+
+
+remaining character will
+be fillup with nullvalues
+at right side
+ 
+
+size if fixed                         size is variable value length
+
+
+
+
+Date:--  
+========
+        this datatype is used to store valid date
+          by default the oracle use the date format
+          DD-MON-YYYY.
+          Date range :- from 1 jan 4712 BC to 31 dec 9999 A.D
+
+ TImestamp:
+ ===========
+ thid datatype is used to store valid date(year,date,month) and time
+ (HH:MM:SS:MS)
+
+
+ AnsI(american national standards institution)
+ ===========================================
+  Int
+ Float
+ Decimal
+ varchar
+....etc
+
+
+ LOB (large binary objects)dataypes:
+ ====================================
+
+  Bfile :- it will stores the locations of file.
+ 
+ BLOB --to store unstructured data -- maximum size is 4gb.
+
+ ClOB -- to store character of binary single character or
+         multiple characters of data ---maximum size is 4gb.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ROWID:
+ ======
+ Every record in database contains physical address or rowid
+
+1001 smith 3000
+1001 smith 3000
+1003 raju   4000
+1005 rakesh 5000
+1001 smith  3000
+
+ XML:
+ ====
+ to store xml data --semi structure data --Introduced in oracle11g 
+
+Eg:
+===
+ <empi>
+ <empno>1001</empno>
+ <ename>smith</empno>
+ <sal>3000</3000>
+  </empid>
+
+
+
+
+
+
+
+ Note:
+ =====
+ insert the values for varchar,varchar2,date  datatypes
+ in single code('');
+
+
+ DDL:
+ =====
+
+ DDL stands for Data definition language.
+
+ DDL is used to define the definitions or schema or structure and
+ modify the definitions or schema or structure in the database.
+
+ DDl commands are auto commit commands.
+
+ DDL commands are
+ -----------------
+ create,alter,rename,truncate,drop
+
+
+create:
+=======
+
+create command is used to define the database objects.
+
+database objects are table,view,sequenc,procedure...etc
+
+
+To create a table syntax:
+========================
+
+syntax:
+=======
+
+
+create table <tablename>(
+               columnam1 datetype(size) [constraints],
+               columname2 datatype(size)[constraints],
+
+                 ---------
+                ----------------------
+		columnamen datatype(size)[constraints]
+             );
+
+
+tablename conventions:
+======================
+
+tablename should be 30 character
+tablename should contain numbers and underscore
+tablename cannot start with number.
+tablename is not case sensitive.
+tablename cannot contain space.
+
+ex1
+===
+create table emp11 it contains the columns
+
+columns          datatype       length
+empno             number          5
+ename		varchar2           10
+sal              number           10,2
+
+
+solu:
+=====
+create table emp11(empno number(5), ename varchar2(10),sal number(10,2));
+								
+or
+
+mysql
+------
+create table emp11(empno int(5),ename varchar(10),sal decimal(10,2));
+sol:
+====
+
+create table  emp11(
+                     empno  number(5),
+                     ename  varchar2(10),
+                     sal    number(10,2),
+                    hiredate  date);
+
+
+
+
+Ex2:
+----
+create table  named as    product_11
+fields or columns --     pid,pname,price
+
+
+insert five records
+
+
+sol:
+====
+create table product_11(pid number(5),pname varchar2(10),price number(5,2)):
+
+Ex:3
+=====
+create table named as course
+
+fields or columnname   dataype   size
+cid                   number      4
+cname                 varchar2   20
+joindate              date
+course_end_date         date
+
+  
+to list all the table from a user:
+===================================
+
+cmd:  select * from tab;
+
+
+to clear screen:
+=================
+cmd: cl scr
+
+
+to show the current user:
+==========================
+cmd: show user;
+
+
+to describe the table structure:
+================================
+
+syntax:
+========
+
+desc[ribe] tablename;
+
+
+
+Insert some records into emp11 table:
+=====================================
+
+
+syntax:
+=========
+
+insert into tablename values(column-value,----columnn-values);
+
+sol:
+====
+
+insert into emp11 values(1001,'smith',20000);
+
+insert into emp11 values(1002,'martin',30000);
+
+insert into emp11 values(1003,'chaitnaya',20000);
+
+insert into emp11 values(1004,'raju',10000);
+
+insert into emp11 values(1005,'harsha',40000);
+
+
+
+
+commit; --to store the records permanently in table. 
+
+
+to list all the records from the table:
+=======================================
+
+syntax:
+-======
+
+select * from tablename;
+
+ex:
+===
+
+select * from emp11;
+
+
+copy a table with schema with out data from existing table
+==========================================================
+
+syntax:
+========
+
+create table tablename as select * or[specific columns]
+                               from tablename where anyfalse condition;
+
+
+ex2:
+====
+
+create a table emp_11(empno,ename,sal) from emp11 table without data.
+
+solu:
+======
+
+
+create table emp_11 as select empno,ename,sal from emp11 where 1=2;
+
+
+copy a table with schema with data from existing table
+==========================================================
+
+syntax:
+=======
+
+create table tablename as select * or[specific columns]
+                                       from tablename;
+
+
+ex:
+===
+
+create a table emp_with_date (empno,ename,sal) from
+existing table emp11 with data.
+
+
+sol:
+====
+
+create table emp_with_data as select empno,ename from emp11;
+
+
+to clear the screen:
+====================
+
+oracle -- cl scr
+mysql -- clear or  ctrl+L
+IBMDB2 !cls
+
+
+Alter:
+=======
+
+alter command is used to modify the definition(structure) of a table.
+
+
+1)to add a new column to an existing table:
+============================================
+
+syntax:
+=======
+
+alter table tablename add columname datatype ;
+
+or
+
+alter table tablename add (column datatype,columname datatype);
+
+note:
+=====
+
+all columns added to table at last.
+
+
+2)modify the column datatype size or change column datatype
+============================================================
+
+note:
+=====
+
+to decrease the size of a column first we need to make
+column as empty.
+
+to change the column datatype then first we need to
+make the column as empty.
+
+
+syntax:
+========
+
+alter table tablename  modify  columnname datatype(size)
+
+ or
+
+alter table tablename modify  (columnname datatype(size),columname datatype(size));
+
+
+3) to drop a column from the table:
+====================================
+
+syntax:
+=======
+
+alter table tablename drop column  columname;
+
+
+4) to rename  a column:
+========================
+
+syntax:
+=========
+
+alter table tablename rename column  colunname to newcolumname;
+
+
+
+
+5)to add a constraint for column:
+==================================
+
+syntax
+------
+alter table tablename add constraint constraintname;
+
+
+6) to drop a constraint for a column:
+======================================
+
+syntax:
+========
+
+alter table  tablename drop constraint  constraintname;
+
+
+example:
+=========
+Already we have emp11 table:
+
+
+alter operations on emp11:
+==========================
+
+a) add column mobileno 
+
+sol:
+=====
+alter table emp11 add mobileno number(10);
+
+
+b) add columns address,job
+============================
+sol:
+---------
+
+alter table emp11 add (address varchar2(20),job varchar2(20));
+
+
+c)current size of ename is 10 then
+  increase the size of ename column to 20;
+
+sol:
+=====
+
+alter table emp11 modify ename varchar2(20);
+
+
+d) alter the datatype of mobileNo from number to varchar
+
+sol:
+----
+alter table emp11 modify mobileno varchar2(10);
+
+mysql
+-----
+alter table emp11 modify mobileno varchar(10);
+
+Ex:
+---
+increase the size of ename column 10 to 20 
+
+--
+alter table emp11 modify ename varchar(20);
+
+
+d)drop a column  address;
+
+sol:
+====
+
+alter table emp11 drop column address;
+
+
+e)rename a column job  to designation
+==========================================
+
+sol:
+----
+alter table emp11 rename column  job to designation;
+
+
+7) adding  constraint at alter level:
+--------------------------------------
+add primary key for existing table emp11 for empno.
+
+sol:
+----
+alter table emp11 add primary key(empno);
+
+
+
+RENAME(for table name):
+==================
+Rename is  used to rename the table.
+
+syntax:
+=======
+oracle:
+-------
+rename oldtablename to  newtablename;
+
+mysql:
+------
+rename table oldtablename to  newtablename;
+
+ex:
+===
+write a query to rename a product_11 to product_22 ?
+
+Ex:
+---
+Mysql:
+------
+rename table product_11 to product_22;
+
+
+truncate:
+=========
+
+this command is used to delete all the records or data
+from the table but not schema. we cannot rollback(truncate is
+auto commit cmd).
+
+syntax:
+=========
+
+truncate table tablename;
+
+ex:
+===
+
+write a query to trunate a table emp11 ?
+
+sol:
+===
+
+truncate table emp11;
+
+
+Drop :
+======
+
+this command is used to drop  the database objects. 
+it will drop data from the table as well as schema.
+
+database objects:- table,view,sequence,procedure..etc
+
+
+to drop a table:
+=================
+
+syntax:
+-------
+
+drop table tablename;
+
+or
+
+to drop a table which contains constraint:
+==========================================
+syntax:
+=======
+drop table tablename cascade constraints;
+
+
+DML
+====
+DML stands Data Manipulation language.
+
+Dml commands are not auto commit commands,
+we need to explicitly commit the DML statements.
+
+DMl commands are:
+==================
+insert,update,delete
+
+
+insert:
+======
+insert command is used to add record into a table.
+
+syntax:
+=======
+insert into tablename values(column value1,col-value2...,colvalue-N);
+
+EX:
+---
+create table emp11(empno int(5),ename varchar(10),sal decimal(10,2));
+
+insert into emp11 values(1001,'smith',20000);
+
+insert into emp11 values(1002,'martin',30000);
+
+insert into emp11 values(1003,'chaitnaya',20000);
+
+insert into emp11 values(1004,'raju',10000);
+
+insert into emp11 values(1005,'harsha',40000);
+
+
+insert  with specific columns:
+================================
+
+it is used to insert the data for specific columns
+
+syntax:
+=======
+
+
+insert into tablename (columnname1,coluname2,---columname3)
+             values(columnvalue1,columnvalue2,---columnname3);
+
+ex:
+====
+
+write a query to insert record for specific columns(empno,ename) into 
+table emp11;
+
+sol:
+====
+
+insert into emp11 (empno,ename) values(1005,'dsds');
+
+or
+insert into emp11 (empno,ename) values(&empno,'&ename');
+
+
+
+insert into select
+=================
+
+syntax:
+========
+
+insert into trg_tablename select columnslist from src_tablename;
+
+note:
+=====
+the trg_tablename columnames and src_tablename columns
+should have the same schema(column data type).
+
+Ex:
+---
+create table emp_dup(empno int(5),ename varchar(10));
+
+insert into emp_dup select empno,ename from emp11;
+
+
+
+
+update:
+=======
+update is used to modify the column values.
+
+syntax:
+=========
+update tablename set columname=value,columnname=value where condition
+
+note:
+=====
+if where condition is not specified total records will be
+updated in the table.
+
+ex:
+===
+
+write a query to update a column ename raju to another name
+where empno 1004?
+
+solu:
+=====
+
+update emp11 set ename='rajuhadoop' where empno=1004;
+
+ex:
+---
+update the sal column of empno =1006.
+
+sol:
+----
+update emp11 set sal=4000 where empno=1006
+
+
+
+
+
+
+
+
+
+
+
+write a query to update a column ename and sal where
+empno 1005?
+
+sol:
+=====
+
+update emp_11 set ename='sdsd',sal=4000 where empno=1005;
+
+
+Assignment:
+===============
+update as select;
+Difference between truncate and delete?
+
+
+
+delete:
+========
+
+this command is used to delete a specific record
+or all the records.
+
+
+syntax:
+=======
+
+delete from tablename where condition; --specific record
+
+or
+
+delete from tablename -----all record will be deleted.
+
+or
+
+delete tablename where condition.
+
+
+ex:
+---
+delete the record of empno 1006
+
+sol: delete from emp11 where empno=1006;
+
+
+Exercise
+-------------------------------
+1. Create table emp12 from table emp ?(Hint : use emp table)-->copy a table
+    Ans: create table emp12 as select * from emp;
+
+2. create table emp13 from emp and into the new table copy only the structure but do not copy data ?
+   Ans: create table emp13 as select * from emp where 5=10
+
+
+3. Increase size of ENAME field to 20 use emp13 table?
+   Ans: alter table emp13 modify ename varchar(20);
+
+
+ALias names:
+=============
+
+alias name is temporary name for column or table.
+
+syntax:
+=======
+
+coluname  as aliasname
+
+or
+
+columname aliasname
+
+columnae "Hire_date"
+
+
+ex:
+====
+
+select empno,ename,sal as salary from emp_11;
+
+
+select e.empno,e.ename,e.sal from emp e;
+
+
+ CONSTRAINTS:
+ ============
+ CONSTRAINT IS A RULE OR RESTRICTION WHICH IMPOSED ON COLUMNS
+ OF THE TABLE.
+ 
+ CONSTRAINTS CAN BE APPLIED AT THE TIME OF COLUMN DEFINITION.
+
+ CONSTRAINTS CAN BE APPLIED AFTER THE TABLE DEFINITION
+
+ CONSTRAINSTS CAN BE APPLIED AT THE ALTER .
+
+
+ CONSTRAINTS ARE DIVIDED INTO THREE
+
+ 1)DOMAIN INTEGRITY CONSTRAINTS
+ -------------------------------
+ NOT NULL
+ CHECK
+
+ 2)ENTITY INTEGRITY CONSTRAINTS
+ --------------------------------
+
+ UNIQUE
+ PRIMARY KEY
+
+ 3)REFERENTIAL INTEGRITY CONSTRAINTS
+ ------------------------------------
+
+ FOREIGN KEY
+
+
+  1)DOMAIN INTEGRITY CONSTRAINTS:
+  ================================
+
+   NOT NULL :
+    ==========
+
+   NOT NULL CONSTRAINT ARE USED TO AVOID NULL VALUES FOR THE
+   SPECIFIED COLUMNS.
+
+   WE CAN APPLY THESE CONSTRAINT AT COLUMN-LEVEL
+
+  EX:
+  ===
+
+  CREATE A TABLE WITH NOT NULL CONSTRAINT WITH OUT NAME FOR EMPNO COLUMN.
+
+  SOL:
+  ====
+
+  CREATE TABLE EMP_1(EMPNO int NOT NULL,
+                          ENAME VARCHar(10),SAL 
+                          decimal(10,2));
+ 
+ insert into emp_1 values(null,'smith',4000); //in valid
+   Error : empno cannot be null
+
+
+ insert into emp_1 values(101,'martin',null);//valid
+ insert into emp_1 values(102,null,4000);  //valid
+
+
+
+check constraint:
+------------------
+Based on condition to restrict columns.
+
+syntax:
+------
+check (condition)
+
+Ex:
+----
+create a table named as emp_2 which contain fours (empno,ename,sal,gender)
+using check constraint  restrict the user to choose either (M or F)
+
+sol:
+----
+create table emp_2 (empno int not null,ename varchar(10),sal decimal(10,2),
+                       gender char(1) check (gender='M' or gender='F'));
+
+
+insert into emp_2 values(1001,'smith',4000,'c');   //invalid
+ERROR 3819 (HY000): Check constraint 'emp_2_chk_1' is violated.
+
+insert into emp_2 values(1001,'smith',4000,'M'); //valid
+
+
+
+unique:
+-------
+Unique constraint restrict the enduser not to enter null values and duplicates.
+
+syntax:
+-------
+unique(columname)
+
+ex:
+----
+create a table product(pid,pname,price)
+apply the constraints unique constraint to pid
+                       for pname,price not null
+
+
+sol:
+-----
+create table product(pid int(5) unique,
+                       pname varchar(10) not null,
+                        price float not null);
+
+
+insert into product values(1,'mouse',400);//valid
+insert into product values(null,'pendrive',800);//valid
+insert into product values(1,'ram',4000);//invalid
+ errorcode : duplicate entry
+
+
+primary key:
+-------------
+it a combination of NOT NUll + Unique
+
+A table contain have one primary key.
+
+syntax:-
+--------
+alter level:
+------------
+
+alter table tablename add primary key(columname);
+
+
+column level:
+-------------
+syntax: create table(colunname1 datatype primary key,
+                      columname2 datatype,
+                      columname3 datatype);
+
+ex:
+---
+create table item(itemid ,itemname,qunatity).
+Here add the primpary at column level for itemid)
+
+sol:
+----
+
+create table item(itemid int(4) primary key,
+                    itemName varchar(10),
+                    quantity int(4));
+
+
+insert into item(null,'fastfood',4);//  error  itemid cannot be null
+insert into item(1,'juices',5);//valid
+insert into item(1,'fruits',5); //duplicate entry found
+
+
+
+table-level:
+=-------------
+create table item2(itemid int(4),
+                    itemName varchar(10),
+                    quantity int(4),
+                    primary key(itemid));  //table-level
+
+
+
+
+insert into item2(null,'fastfood',4);//  error  itemid cannot be null
+insert into item2(1,'juices',5);//valid
+insert into item2(1,'fruits',5); //duplicate entry found
+
+
+foreign key:
+-------------
+To make parent and child relation ship between the tables.
+
+Will use keyword : REFERENCES
+
+To make relation the tables should contain common column.
+
+
+Ex2:
+----
+Address Table(aid -pk,state,pin) --Parent
+Employee Table(eid -pk,ename,sal,aid ) --Child
+
+Create a relation with Address and employee table using foreign key at table level.
+
+Table level syntax:
+------------------
+foreign key(childtable column name) references parenttable(primary key column name)
+
+Ex:
+---
+create table address(aid int(4) primary key,state varchar(10),pin int(6));
+
+
+create table employee(eid int(4) primary key, ename varchar(10),sal decimal(10,2),
+                          aid int(4),
+                          foreign key(aid) references address(aid));
+
+
+
+AT ALTER LEVEL:
+---------------
+PRIMARY:
+--------
+ALTER TABLE TABLE ADD PRIMARY KEY(COLUMNAME)
+
+
+FORIGN KEY:
+------------
+ALTER TABLE TABLENAME ADD FOREIGN KEY(COLUMNAME) REFERENCES PARENTTABLE(PRIMARY KEY COLUMNNAME);
+
+
+SOL:
+----
+
+ALTER TABLE CUSTOMER ADD PRIMARY KEY(CUSTID) ;
+
+ALTER TABLE PRODUCT ADD PRIMARY KEY(PRODUCTID);
+
+ALTER TABLE ORDERS ADD PRIMARY KEY(ORDERID);
+
+ALTER TABLE ORDERS ADD FOREIGN KEY(PRODUCTID) REFERENCES PRODUCT(PRODUCTID)
+
+ALTER TABLE ORDERS ADD FOREIGN KEY(CUSTID) REFERENCES CUSTOMER(CUSTID)
+
+
+
+
+
+
+First insert the data in address:
+---------------------------------
+
+insert into address(1,'Mumbai',500043);
+insert into address(2, 'hyd',500053);
+
+
+Employee:
+---------
+insert into employee(1001,'smith',4000,2);
+insert into employee(1002,'martin',5000,1);
+
+
+insert into employee(1003,'Allen',4000,3);//foreign key constraint failed
+
+delete from address where aid=1; //Cannot delete or update a parent row: a foreign key constraint fails
+
+
+Restrictions on foreign key:
+---------------------------
+On delete cascade:- to delete a record from parent table along with depends records will deleted.
+
+synatx:
+===========
+foreign key(childtable column name) references parenttable(primary key column name) on delete cascade;
+
+Ex:
+---
+create table address_1(aid int(4) primary key,state varchar(10),pin int(6));
+
+
+create table employee_1(eid int(4) primary key, ename varchar(10),sal decimal(10,2),
+                          aid int(4),
+                          foreign key(aid) references address(aid) on delete cascade);
+
+First insert the data in address:
+---------------------------------
+
+insert into address_1(1,'Mumbai',500043);
+insert into address(2, 'hyd',500053);
+
+Employee:
+---------
+insert into employee_1(1001,'smith',4000,2);
+insert into employee_1(1002,'martin',5000,1);
+
+insert into employee(1003,'Allen',4000,3);//foreign key constraint failed
+delete from address where aid=1; // it will delete parent and child records.
+
+
+to list all the constraints on a table:
+---------------------------------------
+show create table tablename;
+
+ex:
+---
+show create table employee;
+
+
+from above the command get the name of the constraint, and drop the constraint using alter
+ex:
+---
+alter table employee drop foreign key employee_ibfk_1;
+
+
+to drop a primary key:
+------------------------
+alter table customer drop primary key;
+
+
+ RELATIONAL OPERATORS:
+ =====================
+  > -- GREATER THAN
+  <  --- LESS THAN
+  <= ---LESS THAN OR EQUAL TO
+  >= --- GREATER THAN OR EQUAL TO
+  == --- EQUAL TO
+  !=  <>  -- NOT EQUAL TO
+
+  BETWEEN -- RETURNS THE VALUE ,THE VALUE SPECIFIED IN THE RANGE.
+            (INCLUSIVE)
+
+  IN --- RETURNS THE VALUE ,THE VALUE AVAILABLE IN THE
+                          GIVEN LIST OF VALUES.
+
+ EXAMPLES:
+ =========
+
+  1)WRITE  A QUERY TO DISPLAY THE RECORDS WHERE SAL LESS THAN 2000
+  FROM EMP TABLE
+
+ SOL:
+ ====
+
+  SELECT * FORM EMP WHERE SAL<2000;
+
+  O/P:- 8 RECORDS.
+
+
+ 2)WRITE A QUERY TO DISPLAY RECORD WITH SPECIFIED RANGE
+  SAL 2000 AND 3000;
+
+ SOL:
+ ====
+
+ SELECT * FROM EMP WHERE SAL>=2000 AND SAL<=3000; 
+
+ OR
+
+ SELECT * FROM EMP WHERE SAL BETWEEN 2000 AND 3000; 
+
+ OLP:-5 RECORDS
+
+
+ 3)WRITE A QUERY TO DISPLAY THE RECORDS BASED ON IN WHERE
+ SAL 1000,2000,3000 ON EMP TABLE.
+
+ SOL:
+ ====
+
+ SELECT * FROM EMP WHERE SAL=1000 OR SAL= 2000 OR SAL=3000;
+ OR
+ SELECT * FROM EMP WHERE SAL IN(1000,2000,3000);
+
+
+ ORDER BY CLAUSE:
+ ================
+ THIS CLAUSE IS USED TO SORT THE OUTPUT STATEMENT BASED ON SELECT
+ QUERY.
+
+ BY DEFAULT IT SORT ASCENDING OR ASC
+
+ DESCENDING  
+ -----------
+DESC
+
+ SYNTAX:
+ ========
+ SELECT * FROM TABLENAME [WHERE][group by] [having by] [ORDER BY COLUMNANME...]
+
+ EX:
+ ===
+  WRITE A QUERY TO DISPLAY THE RECORD FROMM EMP BASED ON
+  SAL COLUMN IN ASCENDING.
+
+  SOL:
+  =====
+  SELECT * FROM EMP ORDER BY SAL ;
+
+  OR
+
+  SELECT * FROM EMP ORDER BY SAL DESC; --DESCENDING ORDER
+
+
+
+  GROUPED FUNCTIONS OR AGGREGATE FUNCTION OR SINGLE ROW FUNCTIONS:
+  =================================================================
+
+  SUM 
+  AVG
+  MIN
+  MAX
+  COUNT
+ 
+  DISTINCT -- TO REMOVE DUPLICATE VALUES
+
+
+  EX:
+  ===
+
+  1)WRITE A QUERY TO COUNT NO OF RECORDS IN EMP TABLE.
+
+  SOL:
+ 
+  ====
+
+   SELECT COUNT(*) FROM EMP;
+
+  2)WRITE A QUERY TO FIND MAX SAL FROM EMP.
+ 
+  SOL:
+  ====
+
+  SELECT MAX(SAL) FROM EMP;
+
+
+ 3) WRITE A QUERY TO FIND SECOND MAX SAL.
+   WE CAN WRITE THIS QUERY USING DENSE RANK OR SUBQUERY.
+
+
+ 4) WRITE A  QUERY TO PEFROM SUM OF SAL  OF ALL EMPLOYESS  IN EMP TABLE.
+ 
+SOL:
+====
+SELECT SUM(SAL) FROM EMP;
+
+O/P: 30325
+
+ 5)select Distinct(sal) from emp;
+
+
+ GROUP BY CLAUSE:
+ ================
+ THIS CLAUSE IS USED TO GROUP OF RELATED INFORMATION.
+
+
+ SYNTAX:
+ =======
+
+  SELECT * FROM TABLNAME [WHERE][GROUP BY COLUMNNAME][ORDER BY COLUMNS];
+
+ EX
+ ===
+ WRITE A QUERY TO PERFORM SUM OF SALARIES BASED ON EACH
+ DEPARTMENT NO FROM EMP TABLE.
+
+ SOL:
+ ====
+ SELECT DEPTNO,SUM(SAL) FROM EMP GROUP BY DEPTNO;
+
+
+ 2) WRITE A QUERY TO PERFROM SUM OF SALARIES BASED ON EACH
+  DEPARMTENT NO AND COUNT NO EMPLOYESS IN EACH DEPT FROM EMP.
+
+SOL:
+====
+SELECT DEPTNO,COUNT(*),SUM(SAL) FROM EMP GROUP BY DEPTNO;
+
+
+  3)WRITE A QUERY TO PEFROM SUM OF SALARIES BASED ON
+   EACH DEPTNO AND EACH JOB .
+
+  SOL:
+  ====
+
+  SELECT DEPTNO,JOB,SUM(SAL),count(*) FROM EMP GROUP BY DEPTNO,JOB;
+
+
+ 3)Having clause:
+  ================
+ to filter the grouped the data then we need to go for having clause;
+  
+  syntax:
+  -------
+   select * from tablename [where][group by][having][order by]
+
+   Ex;
+   ===
+   Write a query to sum(sal) of each dept greater 8750?
+
+   sol:
+
+   select Dept,sum(sal) from emp group by deptno having sum(sal)>8750  order by deptno
+
+  or
+
+ select deptno,sum(sal) as sumsal from emp group by deptno having sumsal>8750 order by deptno desc
+   
+   LIKE OPERATOR:
+ ==============
+
+  IT WILL RETRUN THE VALUE BASED ON SEARCH OF PATTERN
+
+  THERE ARE TWO PATTERNS
+
+  %   ->PERCENATAGE-- REPRESENT ONE OR MORE CHARACTERS
+  _   ->UNDERSCORE -- REPRESENT SINGLE CHARACTER
+
+  SYNTAX:
+  =======
+
+  LIKE 'PATTERN'
+
+ EX:
+ ===
+  WRITE A QUERY TO DISPALY ALL ENAMES FROM EMP
+  WHERE ENAME START WITH S.
+
+ SOL:
+ ====
+  SELECT ENAME FROM EMP WHERE ENAME LIKE 'S%';
+
+  ex:
+  ===
+  write a query to display all enames start with
+
+  sol:
+  =====
+
+  select ename from emp where ename like 'A_L%';
+
+
+
+ JOINS:
+  ======
+  Join are used to retrieve the records from multiple tables .
+
+  join are used to create temporary a relation between the tables
+  based on common column.
+
+  if suppose we have n -tables ,then the atleast the possible join conditions are n-1.
+
+  join are performed based on a common column datatype.
+
+
+  There are two types of joins
+
+ 
+  Equi-joins
+ ----------
+ inner join or simple join or equi join
+  
+ outer join--left [outer] join,right [outer] join,full[outer]join.
+ self join 
+  Non-Equi-joins
+  cross join
+ 
+
+ equi-joins:
+ ============
+ this joins performed based on equal operator (=).
+
+
+ inner join:
+ ============
+ this join return or fetch all records based on condition matched.
+
+ syntax:
+ =======
+ 
+ select * [specific columns] from table1 join table2
+  on (table1.commoncolumname=table2.commoncolumnname).
+
+ 
+  EX:
+  ===
+
+  write a inner join query to get empno,ename,sal,deptno from emp and
+ deptno,dname from dept using alias name.
+
+ sol:
+ ====
+ ANSI Syntax:
+------------
+  select e.deptno,e.empno,e.ename,e.sal,d.deptno,d.dname from 
+  dept d join emp e  on (d.deptno=e.deptno);
+
+  o/p:- 14 records using dept,emp table
+
+
+ or
+
+  select e.deptno,e.empno,e.ename,e.sal,d.deptno,d.dname from emp e,dept d where e.deptno=d.deptno;
+
+
+
+
+
+
+
+ EX:2:
+ =====
+
+ write a inner or equijoin query to get empno,ename,sal from emp and
+ deptno,dname from dept using alias name and display where deptno 20
+
+
+ sol:
+------
+ select e.empno,e.ename,e.sal,d.deptno,d.dname from 
+ dept d join emp e  on (d.deptno=e.deptno) where d.deptno=20
+
+  or
+
+ select e.empno,e.ename,e.sal,d.deptno,d.dname from emp e,dept d where e.deptno=d.deptno and d.deptno=20;
+
+o/p= 5 records.
+
+
+
+
+
+
+ OUTER JOIN:
+ ===========
+
+ LEFT OUTER JOIN:
+ ================
+
+ THIS JOINS RETRIVES OR FETCH ALL THE MATCHED RECORDS FROM BOTH TABLES
+ AND NON-MATCHED  RECORDS FROM LEFT HAND SIDE TABLE IN JOIN.
+ 
+ SYNTAX:
+ ========
+
+ SELECT * [SPECIFIC COLUMNS] FROM TABLE1 LEFT [OUTER] JOIN TABLE2
+ ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+ NOTE:
+ =====
+
+ TABLE1 IS A LEFT TABLE.
+
+
+ EX:
+ ====
+ WRITE A QUERY TO GET EMPNO,ENAME,SAL FROM EMP
+ AND DEPTNO,DNAME FROM DEPT AND DISPLAY MATCHED REOCRDS FROM TWO TABLES
+ AND NON MATCHED RECORDS FROM DEPT TABLE.
+
+SOL:
+===
+	SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D LEFT OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO)
+	
+
+     O/P:- 14 MATCHED REOCRDS FROM DEPT,EMP TABLE  AND 2
+          NON-MATCHED RECORD FROM DEPT TABLE.
+
+
+
+
+ RIGHT OUTER JOIN:
+ =================
+
+ THIS JOIN RETRIVES OR FETCH ALL THE MATCHED RECORDS FROM BOTH THE
+ TABLES AND NON- MATCHED RECORDS FROM RIGHT HAND SIDE TABLE IN JOIN.
+
+ SYNTAX:
+ ========
+
+ SELECT * [SPECIFIC COLUMNS] FROM TABLE1 RIGHT [OUTER] JOIN TABLE2
+ ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+ NOTE:
+ =====
+
+ TABLE2 IS RIGHT TABLE.
+
+ EX:
+===
+
+ WRITE A QUERY TO DISPLLAY EMPNO,ENAME,SAL FROM EMP
+ AND DEPTNO,DNAME FROM DEPT , display MATCHED RECORDS FROM
+ BOTH THE TABLES AND NON MATCHED RECORDS FROM EMP TABLE 
+ USING RIGHT OUTER JOIN.
+
+
+SOL:
+====
+  SELECT E.empno,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM
+  DEPT D RIGHT OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+
+ FULL OUTER JOIN:
+ ================
+ THIS JOIN RETRIVES OR FETCH ALL THE MATCHED AND NON-MATCHED
+ RECORDS FROM THE BOTH THE TABLE.
+
+SYNTAX:
+========
+
+SELECT * [SPECIFIC COLUMNS] FROM TABLE1 FULL [OUTER] JOIN TABLE2
+ON (TABLE1.COMMNCOLUMNAME=TABLE2.COMMONCOLUMNNAME);
+
+EX:
+====
+
+WRITE  A QUERY TO DISPLAY ALL THE RCORDS FROM BOTH TABLES
+USING FULL OUTER JOIN.
+
+EX:
+====
+ SELECT E.Empno,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM
+ DEPT D full OUTER JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+  O/P:17 RECORDS.
+
+
+
+OR
+===
+      SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D ,EMP E WHERE D.DEPTNO=E.DEPTNO(+)        
+        UNION 
+        SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME
+	FROM DEPT D ,EMP E WHERE D.DEPTNO(+)=E.DEPTNO;
+
+
+EX:
+===
+
+WRITE A EQUI JOIN QUERY TO GET DEPTNO,EMPNO,ENAME,SAL FROM EMP
+DEPTNO,DNAME FROM DEPT
+DEPTNO,HISAL FROM SALGRADE JOIN THREE TABLES.
+f
+SOL:
+====
+
+SELECT E.DEPTNO,E.ENAME,E.EMPNO,E.SAL,D.DEPTNO,D.DNAME,
+S.DEPTNO,S.HISAL FROM 
+DEPT D JOIN EMP E ON(D.DEPTNO=E.DEPTNO) JOIN SALGRADE S
+ON (D.DEPTNO=S.DEPTNO);
+
+O/P- 22 ROWS:
+
+
+SELF JOIN:
+==========
+A SELF JOIN is  a join of a table itself.
+
+note:
+=====
+ two table alias name we need to specify in from clause
+ of same table.
+
+
+ ex:
+ ===
+
+ write a self join query to display empolyee name along
+ with his manager names using emp table.
+
+ sol:
+ ====
+ select e.ename,m.ename as manager from emp e,emp m
+ where e.mgr=m.empno;
+
+
+ CROSS JOIN:
+ ===========
+ 
+ THIS PERFORMS CARTIESAN PRODUCT
+
+ EX:
+ ===
+
+ WRITE A QUERY TO PERFORM CROSS JOIN USING DEPT,EMP
+
+ DEPT--5
+ EMP --15
+
+ CROSS JOIN:- 5*15=75 RECORDS.
+
+ SOL:
+ ====
+ SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME FROM 
+ DEPT D CROSS JOIN EMP E;
+
+ or 
+    
+SELECT E.EMPNO,E.ENAME,D.DEPTNO,D.DNAME FROM
+    DEPT D,EMP E;
+
+
+ NATURAL JOIN:
+ =============
+ NATURAL JOIN IS SIMILAR TO INNER JOIN,
+ BUT THE CONDITION IS PERFORMED IMPLICITY BASED ON COLUMN NAME.
+
+ EX:
+ ===   
+
+ SELECT E.ENAME,D.DNAME FROM
+ DEPT D NATURAL JOIN EMP E;
+
+ NOTE:
+ ===== 
+ IN NATURAL JOIN THE COMMON COLUMN NAME BETWEEN  THE TWO TABLE
+ MUST BE SAME. IF NOT IT WILL PERFORM CROSS JOIN
+
+ NATURAL JOIN IS DEPENDENT ON COLUMN NAME .
+
+
+
+
+NON-EQUI JOIN:
+==============
+=,!= OTHER THAN THIS OPERATORS(like between,in,...)
+
+
+SALGRADE Table
+------------------
+CREATE TABLE SALGRADE (GRADE int,LOSAL int,HISAL int); 
+
+INSERT INTO SALGRADE VALUES (1,  700, 1200); 
+INSERT INTO SALGRADE VALUES (2, 1201, 1400); 
+INSERT INTO SALGRADE VALUES (3, 1401, 2000); 
+INSERT INTO SALGRADE VALUES (4, 2001, 3000); 
+INSERT INTO SALGRADE VALUES (5, 3001, 9999);
+
+
+1)WRITE A NON-EQUI JOIN QUERY 
+TO GET EMPNO,ENAME,SAL FROM EMP
+GRADE FROM SAL GRADE
+AND DISPLAY SALARIES BASED ON E.SAL COLUMN BETWEEN
+THE RANGE OF LOSAL AND HISAL COLUMNS OF SALGRADE TABLE.
+
+SOL:
+=====
+
+SELECT E.EMPNO,E.ENAME,E.SAL,S.GRADE
+FROM EMP E,SALGRADE S WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+
+VIEWS:
+======
+A VIEW IS A LOGICAL REPRESENTATION OF DATA FROM ONE OR MORE THEN ONE TABLE.
+
+A VIEW DOES NOT CONTAIN PHYSICAL STORAGE.
+
+A VIEW IS VIRTUAL TABLE.
+
+View does not contain any data.  
+
+When we write select statement on view, we get the data from the table for the first time.
+
+Advantages of MySQL Views
+-------------------------
+MySQL views bring the following advantages.
+
+1) Simplify complex query
+Views help simplify complex queries. If you have any frequently used complex query, you can create a view based on it so that you can reference the view by using a simple SELECT statement instead of typing the query all over again.
+
+2) Make the business logic consistent
+Suppose you have to repeatedly write the same formula in every query.  Or you have a query that has complex business logic. To make this logic consistent across queries, you can use a view to store the calculation and hide the complexity.
+
+3) Add extra security layers
+
+A table may expose a lot of data including sensitive data such as personal and banking information.
+
+By using views and privileges, you can limit which data users can access by exposing only the necessary data to them.
+
+For example, the table employees may contain SSN and address information, which should be accessible by the HR department only.
+
+To expose general information such as first name, last name, and gender to the General Administration (GA) department, you can create a view based on these columns and grant the users of the GA department the view, not the entire table employees .
+
+
+ TYPES OF VIEW:
+ ==============
+
+ 1)SIMPLE VIEW
+ 2)COMPLEX VIEW
+
+
+ SIMPLE VIEW:
+ ============
+ 1) A VIEW IS CREATED BASED ON SINGLE TABLE.
+
+ 2)IN SIMPLE VIEW DOESNOT CONTAIN FUNCTIONS OR GROUP BY CLAUSES.
+
+ 3)WE CAN PERFORM DML OPERATION ON SIMPLE VIEW.
+
+
+ SYNTAX:
+ ========
+ CREATE OR REPLACE VIEW  VIEWNAME  AS SELECT * [SPECIFIC COLUMNS]
+                                   FROM TABLENAME;
+
+ EX:
+ ===
+ CREATE A VIEW ON EMP TABLE IT CONTAINS THREE COLUMNS
+ EMPNO,ENAME,SAL
+
+SOL:
+====
+CREATE or replace  VIEW EMP_V1 AS SELECT EMPNO,ENAME,SAL FROM EMP;
+
+
+TO DISPLAY THE VIEW OUT PUT:
+=============================
+SELECT * FROM VIEWNAME;
+
+ex:
+====
+select * from emp_v1;
+
+
+to drop a view:
+===============
+drop view viewname;
+
+
+
+ COMPLEX VIEW:
+ =============
+
+ A VIEW IS CREATED BASED ON MORE THAN ONE TABLE(JOINS).
+
+ A COMPLEX VIEW CAN CONTAIN FUNCTIONs OR GROUP BY CLAUSE.
+
+ A DML OPERATION PERFROMED ON COMPLEX VIEW INDIRECTLY.
+
+ SYNTAX:
+  =======
+
+ CREATE OR REPLACE VIEW VIEWNAME AS SELECT * FROM TWOTABLES;
+
+ EX:
+ ===
+ CREATE COMPLEX VIEW TO STORE EQUI JOIN OUTPUT OF DEPT AND EMP TABLE.
+
+ SOL:
+ ====
+ CREATE OR REPLACE VIEW EMP_DEPT_EQ AS
+     SELECT E.EMPNO,E.ENAME,E.SAL,D.DEPTNO,D.DNAME FROM 
+         DEPT D JOIN EMP E ON (D.DEPTNO=E.DEPTNO);
+
+
+
+
+
+Read Only View(MySQL WON'T SUPPORT):
+====================================
+We can restrict DML operation views by creating read only view.
+Ex:
+
+Create or replace view v3 As select empno, ename, sal, deptno from emp with read only; 
+
+
+
+With Check Option View::
+====================
+These views will allow DML operation only when where condition is satisfied. 
+
+Ex:
+Create or replace view Test_V12
+As select empno, ename, sal, deptno from emp Where deptno = 30 With check option;
+
+
+ex:
+insert into test_v12 values(7143,'RAJESH',5000,30) //valid
+insert into test_v12 values(7323,'RAJESH',5000,10) //invalid
+
+
+
+
+
+
+
+Different between simple and complex views?
+
+Simple view						Complex view
+1.Created by using only one table.	  1. Created by using multiple tables.
+2.DML operations are allowed.		  2. DML operations are not allowed.
+3.Should not be created using		  3. Can be created using arithmetic arithmetic operations or functions  operations                      or functions or or group by clauses.
+group by clauses.
+
+
+
+Exercises:
+----------
+salesman
+---------
+create below table.
+
+ salesman_id |    name    |   city   | commission 
+-------------+------------+----------+------------
+        5001 | James Hoog | New York |       0.15
+        5002 | Nail Knite | Paris    |       0.13  
+        5005 | Pit Alex   | London   |       0.11
+        5006 | Mc Lyon    | Paris    |       0.14
+        5007 | Paul Adam  | Rome     |       0.13
+        5003 | Lauson Hen | San Jose |       0.12
+
+create table saleman(salesman_id int,name varchar(20),city varchar(20),commission float)
+
+insert into salesman values (5001,'James Hoog','New York',0.15), 
+ 			     (5002,'Nail Knite','Paris',0.13),
+ 			     (5005,'Pit Alex','London',0.11),
+                              (5006,'Mc Lyon','Paris',0.14)
+				(5007,'Paul Adam','Rome',0.13),(5003,'Lauson Hen','San Jose',0.15);
+
+1. From the following table, create a view for those salespeople who belong to the city of New York. 
+2. From the following table, create a view for all salespersons. Return salesperson ID, name, and city.  
+
+3. From the following table, create a view to locate the salespeople in the city 'New York'.
+
+
+
+
+4. From the following table, create a view to count the number of unique customers, compute the average and the total purchase amount of customer orders by each date.
+
+tables:
+-------- 
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+        3008 | Julian Green   | London     |   300 |        5002
+        3004 | Fabian Johnson | Paris      |   300 |        5006
+        3009 | Geoff Cameron  | Berlin     |   100 |        5003
+        3003 | Jozy Altidor   | Moscow     |   200 |        5007
+        3001 | Brad Guzan     | London     |       |        5005
+
+
+create table customer(customer_id int,cust_name varchar(20),city varchar(10),grade int,salesman_id int);
+
+insert into customer values(3002,'Nick Rimando','New York',100,5001);
+insert into customer values(3007,'Brad Davis','New York',200 ,5001);
+insert into customer values (3005,'Graham Zusi','California',200,5002);
+insert into customer values (3008,'Julian Green',' London',300,5002);
+insert into customer values (3004,'Fabian Johnson','Paris',300,5006);
+insert into customer values (3009,'Geoff Cameron','Berlin',100,5003);
+insert into customer values (3003,'Jozy Altidor','Moscow',200,5007);
+insert into customer values (3001,' Brad Guzan','London',null,5005);
+
+orders:
+---------
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70001       150.5       2012-10-05  3005         5002
+70009       270.65      2012-09-10  3001         5005
+70002       65.26       2012-10-05  3002         5001
+70004       110.5       2012-08-17  3009         5003
+70007       948.5       2012-09-10  3005         5002
+70005       2400.6      2012-07-27  3007         5001
+70008       5760        2012-09-10  3002         5001
+
+create table orders (ord_no int,purch_amt float,ord_date date,customer_id int,salesman_id int);
+
+insert into orders values(70001,150.5,'2012-10-05',3005,5002);
+insert into orders values(70009,270.65,'2012-09-10',3001,5005);
+insert into orders values(70002,65.26,'2012-10-05',3002,5001);
+insert into orders values(70004,110.5,'2012-08-17',3009,5003);
+insert into orders values(70007,948.5,'2012-09-10',3005,5002);
+insert into orders values(70005,2400.6,'2012-07-27',3007,5001);
+insert into orders values(70008,5760,'2012-09-10',3002,5001);
+
+
+
+
+
+sol:
+----
+create  or replace view v_2 as select ord_date,count(distinct(customer_id)) as uniqueCustomer,
+avg(purch_amt) as avg,sum(purch_amt) as sum from orders group by ord_date ;
+ 
+
+
+
+
+
+
+Subqueries:
+----------
+Subqueries () are used to get the result based on unknown values. 
+
+They are different type.
+
+1.Single Row subquery
+2.Multiple Row subquery
+3.Multiple column subquery
+4.Co−related subquery
+5.Scalar subquery
+6.Inline view
+
+*Single Row Subquery:
+---------------------
+When subquery returns one row (1 value). It is called Single RowSubquery.
+
+Ex: write a query to display details are having salary > 'ALLENS' sal ?
+
+Select * from emp where sal > (select sal from emp where ename = 'ALLEN'); 
+
+internally:
+----------
+select * from emp wher sal > 1600
+
+Note:
+-----
+Subqueries are executed first and then parent query is executed by using the result of sub query.
+
+
+Level Two query:
+----------------
+Select * from emp where job = (select job from emp where ename = 'ALLEN') AND job = (select job from emp where ename = 'BLAKE');
+0/p=0;
+
+Level Three query(nested sub-query):
+------------------------------------
+Select * from emp where sal > (select sal from emp Where ename = (select ename from emp Where empno = 7499));
+
+
+Note: 
+-----
+The above query is three level query. Sub query can be nested upto 32 levels.
+
+
+
+**Multiple Row Subquery:
+------------------------
+When subquery returns multiple rows. It is called multiple row salary.
+
+Note: we should use multiple row operators with multiple row subqueries. 
+
+They are three multiple row operators.
+1.IN
+2.ANY
+3.ALL
+
+
+All:
+----
+Select * from emp Where sal > ALL(Select sal from emp Where deptno = 30);
+
+Any:
+-----
+Select * from emp where sal > ANY(select sal from emp where deptno = 30);
+
+internally:
+-----------
+select * from emp where sal > ANY(1600,1250,1250,2850);
+
+
+
+
+*IN: 
+-----
+Select * from emp where ename IN('ALLEN', 'KING','FORD');
+
+or
+
+Select * from emp where ename IN(select ename from emp where deptno = 30);
+
+Select * from emp where sal IN(select sal from emp where deptno = 30);
+
+
+
+
+
+*MULTIPLE COLUMN SUBQUERY:
+--------------------------
+When subquery return more then one column. It is called multiple column subquery. 
+We should use in operator with multiple column subqueries.
+
+Select * from emp where(job,sal) IN(select job, sal from emp where deptno = 30); 
+
+
+Exercise:
+---------
+write a subquery to find second highest salary emp table.
+
+sol:
+----
+select max(sal) from emp where sal < (select max(sal) from emp);
+
+
+Co-RELATED SUBQUERY:
+--------------------
+When subquery is executed in relation to parent query, it is called co−related subquery.
+
+*write a query to display all the rows who are having salary greater than AVG salary his department?
+
+Ex:
+----
+Select * from emp e where sal > (select AVG(sal) from emp where deptno = e.deptno);
+
+Execution:
+----------
+The above example is a co−related subquery.
+In co−related subquery, parent query is executed first and then subquery is executed in relation to result of parent query(parenet table alias name).
+
+
+SCALAR subquery: 
+---------------
+when we use subquery in the select clause. It is called as Scalar subquery.
+Scalar subquery are also called sub select.
+
+write a query to display following output?
+
+Deptno	Dname	        Loc		sumsal
+10	Accounting	New York	8750
+20	Research	Dallas		10875
+30	Sales	        Chicago		14400
+40	Operations	Boston		−−−−−−
+
+
+Example:
+--------
+Select deptno, dname, loc, (Select sum(sal) from emp where deptno = d.deptno) Sum_sal from dept d;
+
+
+
+
+
+
+*INLINE VIEW:
+-------------
+When a subquery is used in from clause. It is called INLINE view or inline subsquery.
+
+Ex:
+------
+select dept.deptno, subquery1.total_amt from dept, ( select emp.deptno, Sum(emp.sal) total_amt
+ from emp group by deptno) subquery1 WHERE subquery1.deptno = dept.deptno;
+
+
+
+
+
+Exercises On Subqueries:
+-------------------------
+1. Write a query to display the employee name and hiredate for all
+employees in the same department as Blake. Exclude Blake.
+
+2.Create a query to display the employee number and name for all employees who earn
+more than the average salary. Sort the results in descending order of salary.
+
+3.Write a query to display the employee number and name for all
+employees who work in a department with any employee whose name
+contains a T. 
+
+4.Display the employee name, department number, and job title for all
+employees whose department location is Dallas. 
+
+5.Display the employee name and salary of all employees who report to King.
+
+
+
+
+Exists:
+------
+In the previous section, we used IN to link the inner query and the outer query in a subquerystatement. 
+
+IN is not the only way to do so -- one can use many operators such as >, <, or =.
+
+EXISTS is a special operator that we will discuss in this section.
+
+EXISTS simply tests whether the inner query returns any row. If it does, then the outer query proceeds. If not, the outer query does not execute, and the entire SQL statement returns nothing.
+
+The syntax for EXISTS is: 
+
+SELECT "column_name1"
+FROM "table_name1"
+WHERE EXISTS
+( SELECT *
+ FROM "table_name2"
+ WHERE [Condition] )
+
+Example:
+
+SELECT ename, deptno FROM emp WHERE EXISTS 
+(SELECT * FROM emp WHERE sal >3500 )
+
+
+
+
+
+
+
+INDEXES:
+========
+Index is a database object ,index is a pointer which
+locates the phsyical data of a table.
+
+we can create index explicity on columns,
+so that we can increase the performance of the sql statement query.
+
+
+TYPES OF INDEXES:
+======================================
+1)SIMPLE INDEX
+2)COMPLEX INDEX OR COMPOSITE INDEX
+
+
+SIMPLE INDEX:
+=============
+
+SIMPLE INDEX IS A INDEX WHICH IS CREATED BASED ON SINGLE COLUMN.
+
+SYNTAX:
+=======
+
+CREATE  INDEX INDEXNAME ON  TABLENAME(COLUMNANME)
+
+EX:
+===
+Before Index created:
+---------------------
+
+SELECT * FROM  employees WHERE hire_date > '2000-01-01';
+
+create  index:
+--------------
+CREATE INDEX i_hire_date ON employees(hire_date);
+
+
+After Index created:
+---------------------
+SELECT * FROM  employees WHERE hire_date > '2000-01-01';
+    
+
+NOTE:
+======
+WE NEED TO CREATE INDEX ON COLUMNS,THAT COLUMNS
+FREQUENTLY USED IN WHERE CLAUSE.
+
+WHEN CREATE INDEX THE TABLE WILL BE SCANNED BASED ON INDEX
+ RANGE SCAN.
+
+
+COMPLEX or composite index:
+---------------------------
+A COMPLEX INDEX IS CREATED BASED ON MORE THAN ONE COLUMN.
+
+SYNTAX:
+========
+CREATE INDEX INDEXNAME ON TABLENAME(COL1,COL2...,COL32);
+
+Ex:
+---
+Before Index created:
+---------------------
+SELECT  * FROM employees WHERE first_name = 'Georgi'AND last_name = 'Facello';
+
+create index:
+-------------
+
+CREATE INDEX i_composite ON employees(first_name, last_name);
+
+
+after index created:
+--------------------
+SELECT  * FROM employees WHERE first_name = 'Georgi'AND last_name = 'Facello';
+
+
+3)Unique index:
+----------------
+Syntax:
+--------
+create unique index indexname on tablename(columns);
+
+it will create the indexes on columns as well as it will create the unique constraints on 
+columns(duplicates not allowed).
+ex:
+---
+create unique index infy_fn_ln_uq on info_1(first_name,last_name);
+
+select * from info_1 where first_name='smith' and last_name='joe';
+
+explain select * from info_1 where first_name='smith' and last_name='joe';
+
+it will executes the select query based on index scan
+
+try to insert duplicates in info_1 table.
+
+insert into info_1 values(4,'smith','joe','sa',5000);
+insert into info_1 values(4,'smith','joe','sa',5000);//duplicates entery not allowed
+
+
+
+to list indexes on table from database
+=======================================
+show index from tablename from databasename;
+
+Ex:
+show index from emp from parul;
+
+
+to drop index:
+--------------
+DROP INDEX index_name ON table_name
+
+or
+
+alter table tablename drop index indexname;
+
+
+dense_rank():
+--------------
+This function assigns a rank to each row within a partition. 
+
+The ranks are assigned in a consecutive manner, if there two values are equal then they will be assigned the same rank, and the next rank value will be one greater than the previous rank assigned.
+
+DENSE_RANK() On Sal column:
+---------------------------
+SELECT empno, ename, sal, DENSE_RANK() OVER (ORDER BY sal) my_rank  FROM emp;
+
+Based on each department you need assign DENSE rank using PARTITION BY:
+----------------------------------------------------------------
+SELECT empno, ename, sal,deptno ,
+DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal) dens_rank  
+FROM emp;
+
+Rank:
+-----
+This function assigns a rank to each row within a partition that has gaps. 
+
+In this case, ranks are assigned in a non-consecutive manner i.e if there two records have the same value then they will be assigned the same rank, and the next rank value will be the previous rank plus the number of duplicates.
+
+Examples:
+---------
+SELECT empno, ename, sal, RANK() OVER (ORDER BY sal) my_rank  FROM emp;  
+
+Based on each department you need assign rank using PARTITION BY:
+----------------------------------------------------------------
+SELECT empno, ename, sal, deptno,RANK() OVER (PARTITION BY deptno ORDER BY sal) my_rank  FROM emp;  
+
+
+
+
+SET OPERATORS:
+==============
+UNION
+UNIONALL
+
+Rules for set operators:
+=======================
+1. Number of columns used in the query should match.
+2. column data type should match for the queries in set operators.
+
+UNION:
+======
+THIS OPERATEOR UNION RETRIVES THE OUTPUT OF TWO QUERIES 
+AND IT REMOVES DUPLICATE RECORDS.
+
+CREATE TABLE DEPT_U1 AS SELECT * FROM DEPT;
+CREATE TABLE DEPT_U2 AS SELECT * FROM DEPT;
+
+INSERT SOME RECORDS INTO ABOVE TWO TABLES.
+
+EX:
+====
+
+SELECT * FROM DEPT_U1
+UNION
+SELECT * FROM DEPT_U2;
+
+---IT WILL REMOVE DUPLICATES RECORDS.
+
+UNION ALL:
+==========
+
+SELECT * FROM DEPT_U1
+UNION ALL
+SELECT * FROM DEPT_U2;
+
+NOTE:
+=====
+IT WILL DISPLAY ALL THE DUPLICATE RECORDS FROM TWO TABLES
+
+
+STRING FUNCTIONS:
+==================
+This functions are used to perform  manipulation
+on character data.
+
+1)upper -- upper('string')-it will convert the lowercase into uppercase
+
+2)lower --lower('string') -it wil convert the given string into lowecase
+ 
+3)initcap--initcap('string') -it will display the given string as first letter in capital--in not mysql
+
+4)length --length('string')-it will retrun no of characters count.
+
+5)lpad: 
+========
+this function is used to add the character at the end of left 
+
+syntax:
+=======
+lpad('string',length,chars);
+
+ex:
+====
+write a query to add some characters to a given string;
+
+ex:
+====
+select  lpad('raju',11,'welcome') from  dual;
+
+6)rpad
+=======
+select  rpad('raju',11,'welcome') from  dual;
+
+
+7)ltrim
+=========
+This function will remove the character from left side of 
+a given string
+
+syntax:
+========
+
+ltrim(string,chars);
+
+ex:
+===
+
+write a query to remove the characters from left side a given string
+
+sol:
+====
+select ltrim('welcome','we') from dual;
+
+
+8)rtrim
+========
+this function will remove the characters from right side of a
+given string.
+
+syntax:-- rtrim('string',chars)
+ex:
+===
+
+select rtrim('welcome to raju','raju') from dual;
+
+
+9)trim
+--------
+
+this will remove the characters from left and right side end of a
+given.
+
+syntax:
+=======
+trim(unused from 'string');
+
+ex:
+===
+select trim( 'i' from 'indiani') from dual;
+
+10)substr
+---------
+this function will display a part of  string
+from a given strin.
+
+syntax:
+=======
+substr('string',startposition,no of character);
+
+ex:
+---
+select  substr('welcome',4,2) from dual;
+
+
+11)replace
+==========
+this function used to replace the characters
+
+syntax:
+=======
+replace('string','oldchars','newchars');
+
+ex:
+===
+select replace('chaitanya','ta','ka') from dual;
+
+1)write a query to display string in upper case  from dual;
+
+ex:
+====
+select upper('welcome to training') from dual;
+
+2)write a query to display given string in lowercase from dual;
+
+ex:
+===
+selet lower('WELCOME TO training')  from dual;
+
+
+EXERCISES:
+===========
+
+1) WRITE A QUERY TO DISPLAY ENAME COLUMN IN LOWER CASE FROM EMP;
+
+3)WRITE A QUERY TO REPLACE ENAME=SCOTT   WITH TIGER  FROM EMP;
+
+select replace(ename,'SCOTT','TIGER') from emp
+
+4)WRITE A QUERY TO DISPLAY SUBSTR  OF ALL ENAME  FIRST THREE
+   CHARACTES FROM EMP;
+
+select substr(ename,1,3) from emp;
+
+syntax:
+=======
+substr('string',startposition,no of character);
+
+
+
+
+
+
+
+
+NUMBER FUNCTIONS:
+=================
+
+ABS -- IT WILL DISPLAY ABSLOUTE VALUE INTEGER.
+
+SYNTAX:
+=======
+ABS(NUM)
+
+EX:
+===
+SELECT ABS(5),ABS(-5),ABS(NULL) FROM DUAL;
+
+OLP:--  5,5,
+
+SQRT:
+=====
+IT WILL RETRUN SQRT ROOT VALUE OF A NUMBER.
+
+SYNTAX:
+========
+
+SQRT(NUM);
+
+EX:
+===
+
+SELECT SQRT(4),SQRT(9),SQRT(5),SQRT(NULL),SQRT(256) FROM DUAL;
+
+OLP:-- 2,3,2.36,
+
+MOD:
+====
+THIS FUNCTION RETRUN REMAINDER.
+
+SYNTAX
+======
+
+MOD(VALUE,DIVISON);
+
+EX:
+===
+SELECT MOD(4,2),MOD(5,2) FROM dual;
+
+O/P:- 0,1
+
+
+CEIL:
+======
+THIS FUNCTION ROUND THE VALUE TO HIGHEST POSSIBLE VALUE
+
+SYNTAX:
+========
+
+CEIL(NUM);
+
+EX:
+===
+
+SELECT CEIL(4.5),CEIL(5),CEIL(4.2) FROM DUAL;
+
+OLP:- 5,5,5
+
+FLOOR:
+======
+THIS FUNCTION ROUND THE VALUE TO Lowest POSSIBLE VALUE
+
+SYNTAX:
+-------
+FLOOR(NUM);
+
+EX:
+===
+
+SELECT FLOOR(4.5),FLOOR(4.2),FLOOR(4.7) FROM DUAL;
+
+O/P:- 4,4,4,
+
+pow()
+round()
+rand() -to generate the random numbers;
+
+
+
+LOGINCAL OPERATORS:
+===================
+
+AND 
+OR
+
+IS NULL OPERATOR:
+=================
+THIS RETRUN THE VALUES BASED ON SEARCH OF NULL VALUES.
+
+
+
+
+Normalization:
+=============
+Normalization is process of removing redundancy and improving accurency of the database. 
+Normalization can be achieved by using normal forms.
+
+*1st Normal form (1NF):
+----------------------- 
+A database is in 1NF if it satisfies following rules.
+
+Rule1: Each cell should have one value.
+Rule2: Table should have primary key.
+
+2nd Second Normal form (2NF):
+==========================
+A database is in 2NF if it satisfies following rules.
+Rule1: Database should be in 1NF.
+Rule2: There should be no partial dependency.
+
+Partial dependency:
+==================
+When a non−key attribute is dependent on part of a primary key. Then these exists partial dependency.
+
+3rd Normal form (3NF): 
+====================
+A database is in 3NF if it satisfies the following rules. 
+Rule1: Database should be in 2nd NF.
+Rule2: These should be no transitive dependency.
+
+Transitive dependency: 
+=====================
+When a non key attribute is dependent on another non key attribute then these Exists transitive dependency .
+
+
+Exercise normalization
+----------------------------
+The following table is already in first normal form (1NF). There is only one entry per field. 
+
+Please convert this table to the third normal form (3NF) using the techniques you learned in this Unit.
+
+Check the other solutions and comment them, if necessary. 
+
+A table with the students and their grades in different topics.
+
+UnitID	StudentID	Date	TutorID	Topic	Room	Grade	Book		TutEmail
+U1	St1		23.02.03	Tut1	GMT	629	4.7	Deumlich	tut1@fhbb.ch
+U2	St1		18.11.02	Tut3	GIn	631	5.1	Zehnder		tut3@fhbb.ch
+U1	St4		23.02.03	Tut1	GMT	629	4.3	Deumlich	tut1@fhbb.ch
+U5	St2		05.05.03	Tut3	PhF	632	4.9	Dümmlers	tut3@fhbb.ch
+U4	St2		04.07.03	Tut5	AVQ	621	5.0	SwissTopo	tut5@fhbb.ch
+
+sol:
+----
+
+unitID   topic date room book tutorID
+
+tutorid  tutemail
+
+studentID  Grade unitId
+
+
+
+
+
+
+
+
+
+Common Table Expression (CTE) in MySQL:
+------------------------------------
+A Common Table Expression (CTE) is a temporary named result set that is defined within the scope of a single SQL query. 
+
+It allows you to write complex queries in a more readable and maintainable manner, by breaking them down into smaller, logical steps. 
+
+CTEs can be used in MySQL with the "WITH" keyword, followed by the name of the CTE and the SELECT statement that defines it. Once a CTE is defined, it can be referenced multiple times within the same query.
+
+One of the main benefits of using CTEs is that they allow you to create recursive queries, which are queries that reference themselves. 
+
+This can be useful for tasks such as generating hierarchical data or finding the shortest path between nodes in a graph. 
+
+CTEs can also be used to simplify the syntax of complex joins, to create derived tables that can be used within other queries, or to improve query performance by reducing the number of times that a subquery needs to be executed
+
+MySQL CTE Syntax
+------------------
+The basic syntax for creating a Common Table Expression (CTE) in MySQL is as follows:
+
+WITAH cte_name(
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+)
+SELECT *
+FROM cte_name;
+
+
+
+
+ Syntax:multiple CTEs within the same query, by separating each CTE definition with a comma. For example:
+
+WITH cte1 AS (
+    SELECT column1, column2, ...
+    FROM table1
+    WHERE condition1
+),
+cte2 AS (
+    SELECT column3, column4, ...
+    FROM table2
+    WHERE condition2
+)
+SELECT *
+FROM cte1
+JOIN cte2 ON cte1.column1 = cte2.column3;
+
+In this example, two CTEs are defined: "cte1" and "cte2". The CTEs are then referenced in the main query by joining them on a common column and selecting all columns from both CTEs.
+
+MySQL CTE Examples
+------------------
+An example of how Common Table Expressions (CTEs) can be used in MySQL:
+
+Suppose you have a sales table with columns "product_name", "sales_date", and "revenue". 
+
+You want to calculate the total revenue for each product over the past 30 days, as well as the percentage change in revenue compared to the previous 30-day period. You can use a CTE to calculate these metrics:
+
+The following commands can be used to create the table:
+
+CREATE TABLE sales (
+    product_name VARCHAR(50),
+    sales_date DATE,
+    revenue DECIMAL(10, 2));
+
+The following commands can be used to insert data into the table:
+
+INSERT INTO sales (product_name, sales_date, revenue) VALUES 
+    ('Product A', '2023-03-01', 1000), 
+    ('Product A', '2023-03-15', 1500), 
+    ('Product A', '2023-03-30', 2000), 
+    ('Product B', '2023-03-01', 800), 
+    ('Product B', '2023-03-15', 1200), 
+    ('Product B', '2023-03-30', 1600),
+    ('Product C', '2023-03-01', 500),
+    ('Product C', '2023-03-15', 750),
+    ('Product C', '2023-03-30', 1000);
+
+
+Query:
+-------
+WITH sales_last_30_days AS (
+    SELECT product_name, SUM(revenue) AS total_revenue
+    FROM sales
+    WHERE sales_date BETWEEN '2023-03-10' AND '2023-04-09'
+    GROUP BY product_name
+),
+sales_previous_30_days AS (
+    SELECT product_name, SUM(revenue) AS total_revenue
+    FROM sales
+    WHERE sales_date BETWEEN '2023-02-08' AND '2023-03-09'
+    GROUP BY product_name
+)
+SELECT
+    s.product_name,
+    s.total_revenue,
+    (s.total_revenue - p.total_revenue) / p.total_revenue * 100 AS revenue_change
+FROM sales_last_30_days s
+JOIN sales_previous_30_days p ON s.product_name = p.product_name;
+
+
+
+
+Explanation:
+------------
+This CTE first calculates the total revenue for each product over the past 30 days and stores the result in a CTE called "sales_last_30_days". 
+
+It then calculates the total revenue for each product over the previous 30-day period and stores the result in a CTE called "sales_previous_30_days". 
+
+The main query joins these two CTEs on the "product_name" column and calculates the percentage change in revenue.
+
+More Advanced MySQL CTE Example
+-----------------------------
+An example of more advanced Common Table Expressions (Recursive CTEs) in MySQL:
+
+Suppose you have a database with a table called "sales" that contains sales data for a company. The "sales" table has columns for "order_date", "product", "quantity", and "revenue".
+
+You want to create a report that shows the total revenue generated by each product, broken down by month. However, you also want to include a column that shows the percentage of total revenue generated by each product, based on the revenue generated by all products.
+
+The following commands can be used to create the table:
+
+CREATE TABLE sales1 (
+  order_date DATE,
+  product VARCHAR(50),
+  quantity INT,
+  revenue DECIMAL(10,2)
+);
+
+
+INSERT INTO sales1 (order_date, product, quantity, revenue) VALUES 
+('2023-01-01', 'Product A', 10, 1000.00),
+('2023-01-15', 'Product B', 5, 500.00),
+('2023-02-01', 'Product A', 8, 800.00),
+('2023-02-15', 'Product C', 3, 300.00),
+('2023-03-01', 'Product A', 12, 1200.00),
+('2023-03-15', 'Product B', 7, 700.00);
+
+
+Query:
+-----
+WITH monthly_sales AS (
+  SELECT
+    DATE_FORMAT(order_date, '%Y-%m') AS month,
+    product,SUM(revenue) AS revenue
+  FROM sales1 GROUP BY month,product
+),
+total_sales AS (
+  SELECT
+    month,SUM(revenue) AS total_revenue
+  FROM monthly_sales GROUP BY month
+)
+SELECT
+  monthly_sales.month,
+  monthly_sales.product,
+  monthly_sales.revenue,
+  (monthly_sales.revenue / total_sales.total_revenue)*100 AS percentage
+FROM
+  monthly_sales
+  JOIN total_sales ON monthly_sales.month = total_sales.month
+ORDER BY monthly_sales.month,percentage DESC;
+
+
+
+
+
+Benefits of Using CTE
+-------------------
+Here are some of the benefits of using Common Table Expressions (CTEs) in MySQL:
+
+Simplify complex queries:
+-----------------------
+CTEs can be used to break down complex queries into smaller, more manageable parts. By defining CTEs, you can avoid writing complex subqueries multiple times, which can make your code easier to read and understand.
+
+Improve query performance:
+-------------------------
+CTEs can help improve query performance by reducing the number of database scans required to execute a query. By defining a CTE, you can create a temporary table that can be used to store intermediate results, which can reduce the number of scans required to retrieve data.
+
+Reuse code:
+----------
+CTEs can be used to create modular SQL code that can be reused across multiple queries. By defining a CTE at the beginning of a query, you can create a self-contained module that can be used in other queries, making your code more flexible and adaptable.
+
+Traverse hierarchical data:
+-------------------------
+CTEs can be used to traverse hierarchical data structures, such as organizational charts or product categories. By defining a recursive CTE, you can traverse the hierarchy and perform complex calculations on the data.
+
+Simplify debugging:
+------------------
+CTEs can help simplify debugging by breaking a complex query into smaller parts. By defining CTEs, you can analyze each part of the query individually, making it easier to identify and fix errors.
+
+Improve code readability:
+------------------------
+CTEs can improve the readability of your SQL code by providing a clear and concise way to define temporary named result sets. By using descriptive names for your CTEs, you can make your code easier to read and understand.
+
+
+
+Locking Tables in mysql:
+------------------------
+You can restrict the access to records of the tables in MYSQL by locking them. These locks are used to keep other sessions away from modifying the tables in the current session.
+
+MySQL sessions can acquire or release locks on the table only for itself. To lock a table using the MySQL LOCK TABLES Statement you need have the TABLE LOCK and SELECT privileges.
+
+These locks are used to solve the concurrency problems. There are two kinds of MYSQL table locks −
+
+READ LOCK − If you apply this lock on a table the write operations on it are restricted. i.e., only the sessions that holds the lock can write into this table.
+
+WRITE LOCK − This lock allows restricts the sessions (that does not possess the lock) from performing the read and write operations on a table.
+
+Syntax:
+-------
+Following is the syntax of the MySQL LOCK TABLES Statement −
+
+LOCK TABLES table_name [READ | WRITE];
+
+Unlocking Tables in MySQL
+------------------------
+Once the client session is done using/accessing a MySQL table, they must unlock the table for other client sessions to use it. To do so, you can use the MySQL UNLOCK TABLE statement. This will release the table until other sessions lock it again.
+
+Syntax:
+-------
+Following is the syntax of the MySQL UNLOCK TABLES Statement −
+
+UNLOCK TABLES;
+
+
+
+How to create a user:
+---------------------------
+syntax:
+-------
+CREATE USER 'username'@'host' IDENTIFIED WITH BY 'password';
+
+Grant Privileges:
+-----------------
+GRANT ALL PRIVILEGES ON * . * TO 'new_user'@'localhost';
+
+ex:
+---
+CREATE USER 'sarath'@'localhost' IDENTIFIED BY 'sarath';
+
+GRANT ALL PRIVILEGES ON * . * TO 'sarath'@'localhost';
+
+
+
+to list all users:
+-------------------
+select user,host,account_locked from mysql.user;
+
+
+to drop the user:
+------------------
+drop user 'username'@'localhost';
+
+ex:
+----
+drop user 'lucky'@'localhost' ;
+
+select user,host,account_locked from mysql.user;
+
+
+
+to lock the user:
+-----------------
+alter user 'username'@'localhost' account lock;
+
+Ex:
+----
+alter user 'sarath'@'localhost' account lock;
+
+cmd> mysql -u sarath -p
+Enterpasswor:***** 
+
+will you get the error
+
+to check whether user is locked or not :
+-----------------------------------------
+SELECT user, host, account_locked  FROM mysql.user  
+WHERE user = 'sarath' AND host = 'localhost'; 
+
+to lock unlockthe user:
+-----------------
+alter user 'username'@'localhost' account unlock;
+
+Ex:
+---
+alter user 'sarath'@'localhost' account unlock;
+
+cmd> mysql -u sarath -p
+Enterpasswor:***** 
+
+
+
+
+String Functions:
+------------------ 
+
+MySQL string functions that allow you to manipulate character string data effectively.
+
+1. ASCII(str)
+--------------
+Returns the ASCII value of the leftmost character of the string str.
+
+Ex:
+--
+mysql> select ascii('a');
++------------+
+| ascii('a') |
++------------+
+|         97 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select ascii('A');
++------------+
+| ascii('A') |
++------------+
+|         65 |
++------------+
+1 row in set (0.00 sec)
+
+Ex:
+---
+mysql> select ascii(ename) from emp;
++--------------+
+| ascii(ename) |
++--------------+
+|           83 |
+|           65 |
+|           87 |
+|           74 |
+|           77 |
+|           66 |
+|           67 |
+|           83 |
+|           75 |
+|           84 |
+|           65 |
+|           74 |
+|           70 |
+|           77 |
++--------------+
+
+2.CHAR_LENGTH(str)
+------------------
+Returns the length of the string str in characters.
+
+ex:
+----
+mysql> select char_length('welcome');
++------------------------+
+| char_length('welcome') |
++------------------------+
+|                      7 |
++------------------------+
+1 row in set (0.00 sec)
+
+
+3.CONCAT(str1, str2, …., strn)
+------------------------------
+Returns a string formed by joining str1 to strn. If any sub-string is NULL, the result is NULL.
+
+ex:
+---
+mysql> select concat('hello','hi','welcome') as concat;
+
+mysql> select concat('hello',ename) from emp;
+
+
+4.CONCAT_WS(separator, str1, …, strn)
+--------------------------------------
+Returns a concatenated string separated by a separator.
+
+Ex:
+---
+mysql> select concat_ws('#','hello','hi','welcome') as concat_ws;
++------------------+
+| concat_ws        |
++------------------+
+| hello#hi#welcome |
++------------------+
+
+Ex:
+---
+mysql> select concat_ws('$','hello',ename) as concatws from emp;
+
+
+5.INSERT(str, pos, len, newstr)
+--------------------------------
+Replaces the sub-string starting at position pos and of length len in the string str with newstr.
+
+Ex:
+---
+mysql> select insert('welcome','3','3','aaa');
++---------------------------------+
+| insert('welcome','3','3','aaa') |
++---------------------------------+
+| weaaame                         |
++---------------------------------+
+
+Ex:
+---
+mysql> select ename,insert(ename,3,3,'hii') from emp;
+
+smith,3,3,'hii'  --smhii
+
+
+
+
+6.INSTR(str, substr) / LOCATE(substr, str) / POSITION(substr IN str)
+---------------------------------------------------------------------
+Returns the position of the first occurrence of substr in str.
+
+Ex:
+---
+mysql> select instr('foobar','oo');
+
+
+7.LCASE() / LOWER() and UCASE() / UPPER()
+-----------------------------------------
+Converts a string to lower case and upper case.
+
+Ex:
+===
+mysql> select lcase('HELLO');
+
+mysql> select lower('HELLO')
+
+mysql> select  ucase('sdsdsd');
+
+mysql> select  upper('sdsdsd');
+
+write a query to dislay the ename in lower case from emp table
+ select lower(ename) from emp;
+
+
+
+8.LEFT(str, len) / RIGHT(str, len)
+----------------------------------
+Returns the leftmost and rightmost len characters from the string str.
+
+Ex:
+--
+mysql> select left('hello',3);
++-----------------+
+| left('hello',3) |
++-----------------+
+| hel             |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select right('hello',3);
++------------------+
+| right('hello',3) |
++------------------+
+| llo              |
++------------------+
+1 row in set (0.00 sec)
+
+ select left(ename,3) from emp;
+ select right(ename,3) from emp;
+
+
+9.LENGTH(str) / OCTET_LENGTH(str)
+---------------------------------
+Returns the length of the string str in bytes. 
+
+This is very much like CHAR_LENGTH function. 
+The difference comes when there are multibyte characters in the string.
+
+Ex:
+===
+mysql> select length('welcome');
+
+mysql> select ename,length(ename),char_length(ename) from emp;
+
+
+10.LPAD(str, len, padstr) / RPAD(str, len, padstr)
+---------------------------------------------------
+Inserts sub-string from position 0 of the string padstr at the beginning and 
+end of the string str until the resultant string is of len characters.
+
+Ex:
+---
+mysql> select lpad('hello','17','come');
++---------------------------+
+| lpad('hello','17','come') |
++---------------------------+
+| comecomecomehello         |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('hello','19','come');
++---------------------------+
+| lpad('hello','19','come') |
++---------------------------+
+| comecomecomecohello       |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('hello','7','come');
++--------------------------+
+| lpad('hello','7','come') |
++--------------------------+
+| cohello                  |
++--------------------------+
+1 row in set (0.00 sec)
+
+
+
+11.LTRIM(str) / RTRIM(str) / TRIM(str)
+--------------------------------------
+Returns the string str after trimming white spaces from left, right or both ends.
+
+Ex;
+---
+mysql> select ltrim('  hello');
+
+mysql> select rtrim('hello   ');
+
+mysql> select trim('   hello   ');
+
+
+12.QUOTE(str)
+-------------
+This query quotes and un-quotes the string str. 
+Special characters are escaped.
+
+mysql> select quote('welcome$hello');
++------------------------+
+| quote('welcome$hello') |
++------------------------+
+| 'welcome$hello'        |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select quote('welcome\n hello');
++--------------------------+
+| quote('welcome\n hello') |
++--------------------------+
+| 'welcome
+ hello'         |
++--------------------------+
+
+
+13.REPLACE(str, from_str, to_str)
+-----------------------------------
+Replaces all occurrences of sub-string from_str with sub-string to_str in the string str. 
+It is case-sensitive.
+
+Ex:
+---
+mysql> select replace('welcome','el','hi');
++------------------------------+
+| replace('welcome','el','hi') |
++------------------------------+
+| whicome                      |
++------------------------------+
+1 row in set (0.00 sec)
+
+
+Ex:
+---
+mysql> select ename,replace(ename,'S','A') from emp;
+
+
+
+14.REVERSE(str)
+---------------
+Reverses the string str.
+
+Ex:
+---
+mysql> select reverse('hello') ;
+
+mysql> select ename,reverse(ename) from emp;
+
+
+
+15.SUBSTR(str, pos)/SUBSTRING(str, pos)/SUBSTR(str, pos, len)/SUBSTRING(str, pos, len)
+--------------------------------------------------------------------------------------
+Returns a substring from the string str starting from position pos, 
+till the end if no len is specified or for len characters otherwise. 
+
+Remember, Index starts from 1 in MySQL
+
+Ex:
+==
+mysql> select substr('hello',2),substring('hello',2,2);
++-------------------+----------------------+
+| substr('hello',2) | substring('hello',2) |
++-------------------+----------------------+
+| ello              | ello                 |
++-------------------+----------------------+
+1 row in set (0.01 sec)
+
+mysql> select substr('hello',2,2),substring('hello',2,2);
++---------------------+------------------------+
+| substr('hello',2,2) | substring('hello',2,2) |
++---------------------+------------------------+
+| el                  | el                     |
++---------------------+------------------------+
+1 row in set (0.00 sec)
+
+Ex:
+---
+mysql> select substr('welcome',-4,3);
++------------------------+
+| substr('welcome',-4,3) |
++------------------------+
+| com                    |
++------------------------+
+1 row in set (0.00 sec)
+
+
+
+NUMBER FUNCTIONS:
+=================
+
+ABS -- IT WILL DISPLAY ABSLOUTE VALUE INTEGER.
+
+SYNTAX:
+=======
+ABS(NUM)
+
+EX:
+===
+
+SELECT ABS(5),ABS(-5),ABS(NULL);
+
+OLP:--  5,5,
+
+SQRT:
+=====
+IT WILL RETRUN SQRT ROOT VALUE OF A NUMBER.
+
+SYNTAX:
+========
+SQRT(NUM);
+
+EX:
+===
+
+SELECT SQRT(4),SQRT(9),SQRT(5),SQRT(NULL);
+
+OLP:-- 2,3,2.36,
+
+
+MOD:
+====
+
+THIS FUNCTION RETRUN REMAINDER.
+
+SYNTAX
+======
+
+MOD(VALUE,DIVISON);
+
+EX:
+===
+SELECT MOD(4,2),MOD(5,2);
+
+O/P:- 0,1
+
+ifnull():
+=========
+
+THIS FUNCTION IS USED TO REPLACE THE NULL VALUES.
+
+SYNTAX:
+-------
+ifNULL(colname,REPLACE VALUE)
+
+EX:
+===
+WRITE A QUERY TO DISPLAY COMM COLUMN FROM EMP
+AN REPLACE NULL VALUES WITH 0;
+
+SOL:
+====
+
+SELECT ifnull(COMM,0) FROM EMP;
+
+
+CEIL:
+======
+
+THIS FUNCTION ROUND THE VALUE TO not less than current value.
+
+SYNTAX:
+========
+
+CEIL(NUM);
+
+EX:
+===
+
+SELECT CEIL(4.5),CEIL(5),CEIL(4.2) ;
+
+OLP:- 5,5,5
+
+FLOOR:
+======
+THIS FUNCTION ROUND THE VALUE TO Lowest POSSIBLE VALUE
+
+SYNTAX:
+-------
+FLOOR(NUM);
+
+EX:
+===
+
+SELECT FLOOR(4.5),FLOOR(4.2),FLOOR(4.7);
+
+O/P:- 4,4,4,
+
+pow(numer,exponential):
+======================
+it will return power of an number.
+
+select pow(3,2),pow(2,3);
+
+o/p:-   9,8
+
+
+
+Variable:
+=========
+A variable allows a programmer to store data temporarily during the execution of code.
+
+syntax:
+-------
+set @variablename=initialize the value;
+
+display the data from variable:
+-------------------------------
+
+select @variablename;
+
+Ex:
+===
+
+set @name='Sumit deshpade';  --declare and initialize the variable
+  
+select @name; --display the variable 
+
++----------------+
+| @name          |
++----------------+
+| Sumit deshpade |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> set @dno=20;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp where deptno=@dno;
+
+
+Case- WHEN-END
+===============
+to check multiple conditions
+
+syntax:
+-------
+case columnname
+when condition then result
+when conditon then result
+
+[else]
+
+end;
+
+Ex:
+----
+mysql> select empno,ename,case sal
+    -> when 5000 then 'highest salary'
+    -> when 3000 then 'low salary'
+    -> else 'daily wages'
+    -> end as salary from emp;
+
+
+
+
+mysql> select empno,ename,sal,case
+    when sal>=5000 then 'highest salary'
+    when sal>2000 and sal <=3000 then 'low salary'
+    else 'daily wages'
+    end as status from emp;
+
+
+
+
+if condition:
+-------------
+syntax:
+-------
+
+if (expr1,exp2,exp3)  --> if expr1 is true then it will return exp2,if not then it exp3;
+
+ex:
+---
+select if(10>5,'greater','lesser than 5')
+
+select sal,if(sal>=5000,'high salary','low salary') from emp;
+
+
+
+
+
+
+Procedure
+=========
+A procedure (often called a stored procedure) is a collection of pre-compiled SQL statements stored inside the database. 
+It is a  subprogram in the regular computing language. 
+
+A procedure always contains a name, parameter lists, and SQL statements. 
+
+We can invoke the procedures by using triggers, other procedures and applications such as Java, Python, PHP, etc.
+
+
+Stored Procedure Features
+-------------------------
+Stored Procedure increases the performance of the applications. Once stored procedures are created, 
+they are compiled and stored in the database.
+
+Stored procedure reduces the traffic between application and database server. Because the application has to 
+send only the stored procedure's name and parameters instead of sending multiple SQL statements.
+
+Stored procedures are reusable and transparent to any applications.
+
+A procedure is always secure.The database administrator can grant permissions to 
+applications that access stored procedures in the database without giving any permissions on the database tables.
+
+syntax:
+-------
+
+DELIMITER &&  or DELIMITER //
+CREATE PROCEDURE procedure_name [[IN | OUT | INOUT] parameter_name datatype [, parameter datatype]) ]    
+BEGIN    
+    Declaration_section    /*to declare local variables using delcare keyword*/
+    Executable_section    
+END &&   or  //
+DELIMITER ;  
+
+
+The procedure syntax has the following parameters:
+
+Parameter Name						Descriptions
+--------------				-----------------------------------------------
+procedure_name				It represents the name of the stored procedure.
+
+parameter				It represents the number of parameters. It can be one or more than one.
+
+Declaration_section			It represents the declarations of all variables.
+
+Executable_section			It represents the code for the function execution or sql queries.
+
+ 
+MySQL procedure parameters
+==========================
+
+IN: These types of parameters are assigned the values while calling the stored procedure and 
+    the value cannot be modified or overwritten inside the stored procedure but only referenced and 
+    used by the stored procedure.
+
+OUT: These are the parameters that can be assigned the values and overridden in the stored procedure 
+     but cannot be referenced by it.
+
+IN OUT: These types of parameters are assigned the values while calling the stored procedure and 
+        the value can be modified or overwritten inside the stored procedure as well as
+        referenced and used by the stored procedure.
+
+
+
+to call the procedure:
+======================
+syntax:
+-------
+  call procedurename(if any parameter);
+
+
+Ex:1
+-----
+Create a procedure to store select query to display the data from emp table.
+ 
+sol:
+===
+
+Delimiter //
+create procedure ex1()
+begin
+ select * from emp;
+end //
+
+Delimiter ; /*here restore the delimiter ; back*/
+
+to call procedure:
+===================
+
+call ex1();
+
+
+to display all the procedure from database:
+===========================================
+
+show procedure status where db='database';
+
+ex:
+===
+show procedure status where db='parul402';
+
+to drop procedure:
+==================
+drop procedure  databasename.procedure_name
+
+or 
+
+use database;
+
+drop procedure procedure_name;
+
+
+Ex2:
+====
+
+create a procedure named as ex2 and to store the query to display the emp records
+where depnto 10,20 or 30 using in parameter
+
+sol:
+====
+Delimiter //
+create procedure ex2(in dno decimal)
+begin
+select * from emp where deptno=dno;
+end //
+
+delimiter ;
+
+to call procedure:
+==================
+
+call ex2(10);
+call ex2(20);
+call ex2(30);
+
+Ex3:
+----
+create a procedure named as ex3 to store max(sal) into out parameter from emp table.
+
+sol:
+====
+
+Delimiter //
+
+create procedure ex3(out ms decimal)
+begin
+
+select max(sal) into ms from emp;
+
+end //
+
+delimiter ;
+
+to call procedure with out parameter 
+=====================================
+call ex3(@s);  /*when call the procedure it will return out parameter or variable 					value,then we need to store that value into a variable).
+select @s ;
+
+
+
+Ex:
+====
+write a procedure to perfrom sum of two numbers(two -IN) and return sum(OUT)
+
+sol:
+----
+delimiter //
+create procedure ex_sum(IN a int,IN b int,OUT c int)
+begin
+set c=a+b;
+end //
+
+delimiter ;
+
+----------------
+call ex_sum(10,30,@st)
+
+select @st
+
+
+Ex4:
+-----
+write a procedure to get ename of empno=7566 and display it.
+
+sol:
+----
+delimiter //
+
+create procedure ex_en(in eno decimal,out en varchar(10))
+begin
+
+select ename into en from emp where empno=eno;
+
+end //
+
+delimiter ;
+
+---------------
+call ex_en(7566,@vn);
+
+select @vn
+
+
+
+ex4:
+====
+create procedure named as ex4 to store max(sal) int to outparameter from emp
+where deptno 10 or 20 or 30 using in,out paramter
+
+sol:
+----
+delimiter //
+
+create procedure ex4(in dno decimal,out ms decimal)
+begin
+
+select max(sal) into ms from emp where deptno=dno;
+
+end //
+delimiter ;
+
+to call procedure:
+==================
+call ex4(10,@tn);
+select @tn;
+
+call ex4(20,@tn);
+select @tn;
+
+call ex4(30,@tn);
+select @tn;
+
+
+Ex5:
+----
+create a procedure named as ex5 to store max(sal) from emp
+where deptno 10 or 20 30 using INOUT parameter
+sol:
+----
+Delimiter //
+
+create procedure ex5(inout v_n decimal)
+begin
+select max(sal) into v_n from emp where deptno=v_n;
+end //
+
+delimiter ;   /*to restore delimiter from // to ;*/
+
+to call the procedure:
+======================
+set @n=10;  /*it will act as input parameter */
+
+call ex5(@n);       
+
+select @n;     /*it will act as output parameter*/
+
+--------------
+set @n=20
+
+call ex5(@n);
+
+select @n;
+
+
+Ex6:
+----
+Create a procedure to declare local variable 
+initialize and display it.
+
+sol:
+---
+delimiter //
+create procedure ex6()
+begin
+declare a int;
+declare b varchar(10);   /*declaration of variables */
+declare c float;
+
+set a=10;
+set b='welcome';        /*initialization variable using set keyword*/
+set c=300;    
+
+select a,b,c;           /*display*/
+end //
+
+delimiter ;
+to call the procedure:
+----------------------
+call ex6();
+
+
+conditional or control statement:
+=================================
+if:
+---
+if condition then
+  statement-1;
+end if;
+
+
+if-else:
+--------
+
+syntax:
+-------
+
+if condition then
+  statement-1;
+else
+  statement-2;
+
+end if;
+
+
+Ex:
+---
+create a procedure to compare two integer variables
+display which is greater  using in parameter.
+sol:
+===
+Delimiter //
+create procedure ex7(in a int,in b int)
+
+begin
+declare msg varchar(30);
+
+if a>b then
+   set msg='a is greater than b';
+else
+   set msg='b is greater than a';
+end if;
+
+select msg;
+
+end //
+
+delimiter ;
+
+
+to call procedure:
+------------------
+call ex7(10,5)  ;   
+
+call ex7(1,5) ;
+
+
+Ex:
+---
+if-else-if:
+-----------
+
+syntax:
+-------
+
+if condition then
+  statement-1;
+elseif condition then
+  statement-2;
+elseif condition then
+  statement-3;
+else 
+  statement-4;
+
+end if;
+
+ex:
+---
+create a procedure to compare three integer variables
+display which is greater  using in parameter and if-else-if.
+
+sol:
+---
+Delimiter //
+
+create procedure ex8(in a int,in b int,in c int)
+begin
+
+declare msg varchar(30);
+
+if a>b and a>c then
+   set msg='a is greater than b,c';
+
+elseif b>c and b>a then
+   set msg='b is greater than a,c';
+
+else
+   set msg='c is greater than a,b';
+
+end if;
+
+select msg;
+
+end //
+
+delimiter ;
+
+to call procedure:
+==================
+call ex8(10,5,1);
+
+call ex8(5,10,2);
+
+cal ex8(5,1,7);
+
+
+Exercises:
+=========
+1)create a procedure named as ex9 to perform sum of two number 
+using in parameters.
+sol:
+----
+delimiter //
+
+create procedure ex_9(in n1 int,in n2 int)
+begin
+
+declare res int;
+
+set res=n1+n2;
+
+select res;
+
+end //
+
+delimiter ;
+
+to call procedure:
+------------------
+call ex_9(10,10);
+
+
+2)create a procedure named as ex10 to perform sum of two number 
+using in parameters and out parameter
+
+sol:
+----
+delimiter //
+
+create procedure ex10(in n1 int,in n2 int,out res int)
+begin
+
+set res=n1+n2;
+
+end //
+
+delimiter ;
+
+
+to call procedure:
+==================
+call ex10(10,30,@rs);
+
+select @rs;
+
+
+Function:
+---------
+In MySQL, a function is a stored program that you can pass parameters into and then return a value.
+
+Just as you can create functions in other languages, you can create your own functions in MySQL.
+
+Syntax
+-------
+   
+The syntax to create a function in MySQL is:
+--------------------------------------------
+DELIMITER //  
+
+CREATE FUNCTION function_name [ (parameter datatype [, parameter datatype]) ]
+RETURNS return_datatype
+
+DETERMINISTIC
+
+BEGIN
+
+   declaration_section
+
+   executable_section
+   return datatype;
+
+
+END;
+
+DELIMITER //  
+
+function_name
+--------------
+The name to assign to this function in MySQL.
+
+parameter
+----------
+One or more parameters passed into the function. When creating a function, 
+all parameters are considered to be IN parameters (not OUT or INOUT parameters) 
+where the parameters can be referenced by the function but can not be overwritten by the function.
+
+return_datatype
+----------------
+The data type of the function's return value.
+
+declaration_section
+--------------------
+The place in the function where you declare local variables.
+
+executable_section
+------------------
+The place in the function where you enter the code for the function.
+
+DETERMINISTIC:
+--------------
+it means the function will return the same values if the same arguments are supplied to it.
+
+
+to call function:
+==================
+
+select function_name(if any parameters pass the value);
+
+
+Ex:
+---
+create a function named as addition which takes three parameters
+and perform sum of three numbers and return it
+
+sol:
+----
+
+delimiter //
+create function addition(a int,b int,c int)
+returns int
+
+DETERMINISTIC
+
+begin
+
+return (a+b+c);
+
+end //
+
+delimiter ;
+
+to call the function:
+----------------------
+select addition(10,20,30);   //it will return 60;
+
+or
+---
+create table test1(a int,b int,c int);
+insert into test1 values(10,30,50);
+
+select addition(a,b,c) from test1;
+
+
+
+to drop function:
+-----------------
+drop function function_name;
+
+note:
+-----
+function name should be userdefined name.
+(Don't use predefined function names like string functions,date functions,number functions etc).
+
+
+Ex:
+---
+create a function which returns the max(sal) from emp table.
+
+sol:
+----
+
+delimiter //
+
+create function ms() /*default funtion*/
+returns decimal
+
+DETERMINISTIC
+
+begin
+
+declare v_m decimal;
+
+select max(sal) into v_m from emp;
+
+return v_m;
+
+end //
+
+delimiter ;
+
+to call the function:
+=====================
+select ms() as maximumSal;
+
+
+Exercise:
+---------
+create a function to display welcome 'ename' from emp table
+when pass a ename column it should print welcome smith...etc
+
+sol:
+====
+delimiter //
+
+create function concat_en(n varchar(10))
+returns varchar(20)
+
+DETERMINISTIC
+
+begin
+
+declare en varchar(20);
+  
+set en=concat('welcome ',n);
+
+return en;
+
+end //
+
+delimiter ;
+
+
+to call the function:
+=====================
+
+select concat_en(ename) from emp;
+
+select concat_en(' Rajukumar');
+
+
+
+
+
+
+TRIGGERS:
+=========
+
+A Trigger in MySQL is a special kind of stored operation that gets invoked automatically when an event has 
+occurred in the database.
+
+It is a database object which is related to a table in the database and becomes active when a defined MySQL 
+statement is initiated on the table. 
+
+These DML (Data Manipulation Language) execution operations can be INSERT, DELETE, UPDATE and triggers 
+can be called before or after these events.
+
+A trigger is a set of actions that are run automatically when a specified change operation 
+(SQL INSERT, UPDATE, or DELETE statement) is performed on a specified table. 
+Triggers are useful for tasks such as enforcing business rules, validating input data, and keeping an audit trail.
+
+
+For example when a row is inserted to a table or when any columns are modified, a trigger can be fired. 
+Mostly, triggers can are made to run whenever any alterations are done to the data of a table. 
+
+Triggers are simply a SQL code to run before or just after any DML action events on a particular table in a database.
+
+
+Syntax
+-------
+
+CREATE
+[DEFINER = user] TRIGGER trigger_name
+trigger_time trigger_event
+ON tbl_name 
+FOR EACH ROW
+trigger_body
+
+trigger_time: { BEFORE | AFTER }
+trigger_event: { INSERT | UPDATE | DELETE }
+
+
+Parameters
+------------
+DEFINER clause:
+---------------
+ Identifies the MySQL account that is used for access at trigger initiation time.
+
+trigger_name:
+-------------
+The name of all triggers should be unique inside a schema.
+
+trigger_time: 
+-------------
+Defines the trigger action time which can be either before or after any row affected.
+
+trigger_event: 
+--------------
+Specifies the type of operation to activate the trigger.
+
+tbl_name: 
+---------
+The table name should be of a permanent table not a temporary or a view table to associate a trigger.
+
+trigger_body: 
+-------------
+It is used to display a statement when the trigger is fired. 
+The compound statement construct BEGIN … END can be used to complete many statements.
+
+
+Types of Trigger in MYSQL
+=========================
+Two types of triggers are defined by the SQL standard:
+
+Row-Level Trigger: 
+=================
+It is executed when each row is affected by insertion, updation and deletion actions on a table. 
+Like if you have a table and 50 rows are inserted, updated or deleted, then automatically the trigger
+is also invoked for 50 times.
+
+Statement-Level Trigger: 
+======================
+This trigger is invoked only once for a transaction regardless of the number of rows inserted, updated, or deleted.
+
+note:
+=====
+Row-Level Trigger is supported in MySQL but not Statement-Level Trigger.
+
+
+PSEUDO COLUMNS:
+===============
+
+NEW:- IT REPRESENT NEW VALUES FOR A COLUMNS OF A TABLE 
+
+OLD :- IT REPRESNT OLD VALUES FOR A COLUMNS OF A TABLE.
+
+
+full syntax:
+============
+delimiter //
+
+create trigger trigger_name
+
+{before/after} 
+
+[insert or update or delete] on table_name
+
+for each row
+
+begin 
+
+statment; or logic;
+
+end //
+
+delimiter //
+
+
+Example:
+========
+1) create a table named as emp13(empno,ename,sal)
+2) create a trigger  before insert into emp13 covert the ename into capital letter.
+3) perform multiple insert to check trigger is fired or not?
+
+
+
+
+sol:
+----
+
+1)create table emp13(empno int(4),ename varchar(10),sal decimal(7));
+
+2)
+
+delimiter //
+
+create trigger trg_emp_13
+before insert on emp13
+for each row
+begin
+
+set New.ename=upper(New.ename);
+
+end //
+
+delimiter ;
+
+3)
+insert into emp13 values(101,'ramu',3000);
+
+
+Example:
+--------
+1)create table emp14(empno int,ename varchar(10),sal decimal(10,2));
+
+2)create table messag(msg varchar(30));
+
+trigger:
+--------
+delimiter //
+
+ create trigger trg_emp_14     
+    before insert on emp14
+    for each row
+    begin
+    
+insert into messag values('insert trigger fired on emp14');
+ end //
+
+3) insert the record into emp14
+insert into emp14 values(101,'smith',4000),(102,'rahu',3000);
+
+
+Example:
+----------
+write a trigger on emp15 table before insert  into empno column append PU_ to empno.
+insert into emp15 values(5010,'smith',3000);
+
+select * from emp15;
+
+PU_5010 smith 3000
+
+sol:
+----
+1)create table emp15(empno varchar(10),ename varchar(10),sal decimal);
+
+2)
+delimiter //
+ create trigger trg_emp_15     
+    before insert on emp15
+    for each row
+    begin
+    set New.empno=concat('PU_',New.empno);
+  end //
+
+  delimiter ;
+
+3)
+insert into emp15 values('5010','smith',3000);
+
+select *  from emp15
+
+
+
+
+
+Exercise:
+=========
+1)create table studentdetails(sid int(4),sname varchar(10),m1 int(3),m2 int(3),m3 int(3),total int(5));
+
+2)create trigger on studentdetails before insert to table it should calculate sum of m1+m2+m3 and store in total column
+
+sol:
+----
+1) create table studentdetails(sid int(4),sname varchar(10),m1 int(3),m2 int(3),m3 int(3),total int(5));
+
+2)
+delimiter //
+create trigger trg_sd
+before insert on studentdetails
+for each row
+begin
+set New.total=New.m1+New.m2+New.m3;
+end //
+
+delimiter ;
+
+3) insert into studentdetails (sid,sname,m1,m2,m3) values (1,'Rahul',60,60,70);
+select * from studentdetails;
+
+1 Rahul 60 60 70  190
+
+
+
+execute insert
+==============
+mysql> insert into studentdetails (sid,sname,m1,m2,m3) values
+    -> (101,'rahul',60,70,80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentdetails;
++------+-------+------+------+------+-------+
+| sid  | sname | m1   | m2   | m3   | total |
++------+-------+------+------+------+-------+
+|  101 | rahul |   60 |   70 |   80 |   210 |
++------+-------+------+------+------+-------+
+1 row in set (0.00 sec)
+
+
+
+Example:
+--------
+bank audting
+
+1)create a table emp_base(empno,ename,sal): --original table
+
+sol:  
+  create table emp_base(empno int(4),ename varchar(10),sal int(8));
+
+  insert into emp_base(1001,'smith',3000);
+
+
+2)create a backup table named as           --to maintain history  emp_base_update(empno,n_ename,o_ename,n_sal,o_sal,operat,ondate):
+
+sol:
+  create table emp_base_update_bkup(empno int(4),n_ename varchar(10),
+             o_ename varchar(10),n_sal int(8),o_sal int(8),opera varchar(10),ef_ondate date);
+
+
+3)create a trigger before update an record in emp_base table insert that record into emp_base_update(history,new value).
+
+sol:
+----
+
+delimiter //
+
+create trigger trg_adut_emp_base
+before update on emp_base
+for each row
+begin
+
+insert into emp_base_update (empno,n_ename,o_ename,n_sal,o_sal,opera,ef_ondate) values
+                  (old.empno,new.ename,old.ename,new.sal,old.sal,'update',current_date());
+
+end //
+
+delimiter ;  
+
+Execute:
+--------
+mysql> update emp_base set ename='martin',sal=5000 where empno=1001;
+
+mysql> select * from emp_base;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|  1001 | martin | 5000 |
++-------+--------+------+
+1 row in set (0.00 sec)
+
+
+mysql> select * from emp_base_update;
++-------+---------+---------+-------+-------+--------+------------+
+| empno | n_ename | o_ename | n_sal | o_sal | opera  | ef_ondate  |
++-------+---------+---------+-------+-------+--------+------------+
+|  1001 | martin  | smith   |  5000 |  3000 | update | 2021-03-05 |
++-------+---------+---------+-------+-------+--------+------------+
+1 row in set (0.00 sec)
+
+
+
+Exercise:
+--=======
+1)create a table emp_base(empno,ename,sal)
+  
+  create table emp_base(empno int(4),ename varchar(10),sal int(8));
+
+  insert five records.
+
+
+2)create a backup table named as emp_base_delete(empno,ename,opera,ondate);
+
+create table emp_base_delete( empno int(4),ename varchar(10),sal int(8),opera varchar(10),ef_ondate data);
+
+
+3) create a trigger before delete a record from emp_base,the deleted record should backup into emp_base_delete table.
+
+sol:
+----
+
+
+delimiter //
+
+create trigger trg_adut_emp_del
+before delete on emp_base
+for each row
+begin
+
+insert into emp_base_delete(empno,ename,sal,opera,ef_ondate) values
+     (old.empno,old.ename,old.sal,'delete',current_date());
+                
+end //
+
+delimiter ;
+
+
+Execute:
+========
+mysql> delete from emp_base where empno=1005;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp_base;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|  1001 | john   | 6000 |
+|  1002 | laxmi  | 5000 |
+|  1003 | ramesh | 2000 |
+|  1004 | raj    | 1000 |
++-------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp_base_delete;
++-------+-------+------+--------+------------+
+| empno | ename | sal  | opera  | ef_ondate  |
++-------+-------+------+--------+------------+
+|  1005 | sumit | 4000 | delete | 2021-03-05 |
++-------+-------+------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>
+
+
+
+to drop a trigger:
+==================
+drop trigger trigger_name;
+
+
+to list all trigger on table:
+=============================
+show triggers from database_name where `table`='tablename'
+
+here we need to use back quote(`)
+ex:
+---
+show triggers from parul where `table`='emp_base';
+
+
+
+Drive Link To Upload The Assignments and Project (convert to zip)
+Last4DIGITENROLLNO_YOURNAME
+====================================
+https://forms.gle/Uh5A9rRmYT6TmUNw8
+
+
+
+
+
